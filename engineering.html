@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The model interprets the case. The harness decides whether the interpretation may survive.">
+  <meta name="theme-color" content="#f6f7f2">
+  <title>Building a System That Can Say ‘Not Yet’ · The Compliance Decision System</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="article-page engineering-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page-frame">
+    <header class="site-header">
+    <a class="site-name" href="index.html">The Compliance Decision System</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" aria-label="Primary navigation">
+      <a href="comparison.html">Comparison</a><a href="executive.html">Executive brief</a><a href="engineering.html" aria-current="page">Engineering</a><a href="philosophy.html">Philosophy</a>
+    </nav>
+  </header>
+    <main id="main" class="article-main">
+    <header class="article-header">
+      <p class="series-label">Engineering · July 2026 · 7 min</p>
+      <h1>Building a System That Can Say ‘Not Yet’</h1>
+      <p class="article-dek">The model interprets the case. The harness decides whether the interpretation may survive.</p>
+    </header>
+    <figure class="hero-art"><img src="assets/engineering-hero.webp" alt="A cutaway view of a governed compliance harness."></figure>
+    <aside class="article-proof"><figure class="architecture-figure layers-figure">
+    <figcaption><strong>The replaceable model inside a durable trust architecture</strong><span>Policy and proof remain external to the weights.</span></figcaption>
+    <div class="layers">
+      <div class="layer evidence-layer"><b>Normalized evidence</b><span>safe facts · missingness · case boundaries</span></div>
+      <div class="layer policy-layer"><b>Handbook engine</b><span>identity · relief · exclusions · disposition</span></div>
+      <div class="layer model-layer"><b>Bounded reasoner</b><span>replaceable model · selected rules · fixed contract</span></div>
+      <div class="layer verifier-layer"><b>Independent verifier</b><span>schema · citations · hashes · fail closed</span></div>
+      <div class="layer trace-layer"><b>Decision trace</b><span>what entered · what controlled · what shipped</span></div>
+    </div>
+  </figure></aside>
+    <article class="article-body"><h2 id="the-ai-interprets-the-case-the-harness-decides-whether-the-interpretation-may-survive">The AI interprets the case. The harness decides whether the interpretation may survive.</h2><p>The central engineering problem in this repository is not generating a compliance answer. It is producing an answer whose policy source, evidence, sequence, uncertainty, and provenance remain intact after an AI has touched it.</p>
+<p>That requires two systems working together. The reasoner handles ambiguity. The harness defines the world the reasoner can see, verifies the result against that world, and collapses unsupported certainty into <code>ManualReview</code>.</p>
+<h2 id="1-start-with-a-versioned-operating-specification">1. Start with a versioned operating specification</h2><p>Model A reads one live rule source: <code>rules/handbook.v1.json</code>. The file is an executable mirror of the UBS Court Research Procedural Guide, revision 2026-05-08. It carries its source metadata, handbook-page provenance, decision-axis resolutions, matching policy, and the JSON-pointer namespace used by final decisions.</p>
+<p>This choice is precise and deliberately narrow. The handbook is the operating specification for this system. It is not presented as an independently validated legal ceiling. That distinction is encoded in the rulebook metadata and preserved in the writeups because changing the source of truth changes the question the system answers.</p>
+<p>The decisive citation namespace is <code>#/handbook/…</code>. Statutory citations are forbidden in the Model A decision contract. A model may not improve the appearance of an answer by reaching outside the evidence packet it was given.</p>
+<h2 id="2-normalize-before-reasoning">2. Normalize before reasoning</h2><p>The model-facing object is a normalized <code>ComplianceCase</code>, not raw UBS XML. The XML adapter reduces source records into bounded fields such as state, charge, disposition, timing, salary, identity sufficiency, pending status, relief flags, parse warnings, and manual-review reasons.</p>
+<p>This boundary serves three jobs:</p>
+<ul>
+<li>it keeps raw names, historical people, and row-level case content out of model-facing training data;</li>
+<li>it gives rules, models, and evaluators the same typed facts; and</li>
+<li>it makes missingness explicit instead of letting a model silently infer around it.</li>
+</ul>
+<p>Clean no-hit facts resolve to <code>Exempt</code>. Contradictory no-hit signals, parse warnings, or unresolved evidence route to <code>ManualReview</code>. Missing information is a state the system handles, not whitespace the model is invited to fill.</p>
+<h2 id="3-apply-the-handbook-in-order">3. Apply the handbook in order</h2><p>The deterministic engine in <code>handbook_decision.py</code> follows four gates:</p>
+<pre><code class="language-text">G0  identity sufficiency
+G1  record relief
+G2  offense exclusions
+G3  disposition classification and timing
+</code></pre>
+<p>Order is part of the policy. Confirmed record relief can end the decision before later timing math. An offense exclusion can make a disposition branch irrelevant. A pending matter and a conviction do not share the same clock. A missing salary in an off-ramp state can require review, while salary may be irrelevant in a no-off-ramp state.</p>
+<p>The engine therefore does more than search for keywords. It uses most-specific matching, conditional disposition handling, state-aware branches, exclusive thresholds, timing rules, and explicit review outcomes for unresolved inputs.</p>
+<p>This deterministic lane owns exact branches because its failures are testable and reproducible. It also provides the reference machinery for synthetic goldens and future fine-tuning traces.</p>
+<h2 id="4-select-evidence-before-calling-the-reasoner">4. Select evidence before calling the reasoner</h2><p><code>ComplianceHarness.evaluate()</code> first selects the rules relevant to the normalized case. The reasoner does not receive the entire universe of possible policy text. It receives a bounded evidence packet and a fixed decision contract.</p>
+<p>When deterministic guardrails can decide the case, they do. When they cannot, the configured reasoner handles the remainder. The production architecture can use an LLM with selected rules and tools; local and offline tests can use the same interface with a heuristic reasoner.</p>
+<p>That seam is important. The model is replaceable. The input contract, rule selection, verification, and trace shape remain stable.</p>
+<h2 id="5-treat-the-models-answer-as-an-untrusted-draft">5. Treat the model’s answer as an untrusted draft</h2><p>A model response must deserialize into the compliance decision schema and carry, at minimum, a legal flag, explanation, confidence, rule version, rule hash, rule revision date, citations, and review posture. Audit-oriented lanes can additionally require model-supplied reasoning steps and citation details.</p>
+<p>The <code>DecisionVerifier</code> checks the draft independently:</p>
+<ul>
+<li>the JSON schema is valid;</li>
+<li>the flag is one of <code>Disclosable</code>, <code>Exempt</code>, or <code>ManualReview</code>;</li>
+<li>unresolved <code>manual_review_reasons</code> have not been ignored by a confident final decision;</li>
+<li>the explanation and provenance fields are present;</li>
+<li>every citation stays inside the handbook namespace;</li>
+<li>every citation was selected for this case;</li>
+<li>the decision’s rule hash matches the selected evidence;</li>
+<li>audit steps and citation details satisfy their contract; and</li>
+<li>decisive citations do not misuse overlay-only material.</li>
+</ul>
+<p>The verifier proves contract compliance and provenance. It does not claim to be an independent legal oracle. Legal or operational correctness is established through the source rulebook, boundary fixtures, held-out labels, and review—not by citation membership alone.</p>
+<h2 id="6-fail-closed-in-software-not-in-prose">6. Fail closed in software, not in prose</h2><p>If verification returns errors and <code>fail_closed</code> is enabled, the harness rewrites the draft to <code>ManualReview</code>. It retains only citations that actually belonged to the selected packet, caps confidence, marks review as required, and carries the verifier errors into warnings.</p>
+<p>That implementation detail is the system’s safety posture in executable form:</p>
+<blockquote>
+<p>An unsupported answer may remain visible as evidence of what the model tried. It may not remain executable as a final compliance decision.</p>
+</blockquote>
+<p><code>ManualReview</code> is therefore not the absence of an answer. It is a first-class, measured outcome for cases whose evidence, classification, or model output does not justify a final disposition.</p>
+<h2 id="7-emit-a-trace-another-person-can-reconstruct">7. Emit a trace another person can reconstruct</h2><p>Every evaluation returns a <code>HarnessTrace</code> containing the case identifier, rule snapshot, selected rule IDs, evidence snippets and hashes, procedural order, final decision, and verifier errors. The harness can synthesize audit details for baseline operation, while proof lanes may require the model itself to supply the reasoning record.</p>
+<p>This trace separates three questions that are often collapsed:</p>
+<ol>
+<li>What did the source policy say?</li>
+<li>What did the model or deterministic engine conclude?</li>
+<li>Why did the harness permit, rewrite, or block that conclusion?</li>
+</ol>
+<p>The trace is the handoff between operations, engineering, evaluation, and future training.</p>
+<h2 id="8-optimize-the-reasoner-without-optimizing-the-rules">8. Optimize the reasoner without optimizing the rules</h2><p>GEPA is allowed to improve prompts, rule selection, procedural instructions, verifier rubrics, and examples. It is not allowed to mutate the handbook, schemas, labels, or frozen evaluation cases.</p>
+<p>Candidate reports record immutable boundaries, guardrail status, objective mode, balanced accuracy, artifacts, and promotion failures. An unsafe or otherwise non-promotable candidate cannot be silently crowned as the best production result merely because its aggregate score is high.</p>
+<p>The Model A proof contract deliberately scores the model-under-test lane with guardrails off. Promotion requires at least 0.95 balanced accuracy on the blind split and no failures across unsafe disclosure, false exemption, prompt leakage, schema validity, citation validity, handbook namespace, or excessive abstention on clear rows.</p>
+<p>The guardrails-on run answers a different question: does the complete control architecture remain safe? It must be reported separately so deterministic correctness does not conceal weak model reasoning.</p>
+<h2 id="9-keep-the-three-model-lanes-experimentally-distinct">9. Keep the three model lanes experimentally distinct</h2><table>
+<thead>
+<tr>
+<th>Lane</th>
+<th>What the model receives</th>
+<th>What the result proves</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Model A</td>
+<td>Selected rules, bounded tools, verifier, optional guardrails</td>
+<td>Whether a general reasoner can operate inside a governed compliance system</td>
+</tr>
+<tr>
+<td>Model B</td>
+<td>Normalized facts only; no rule text, retrieval, or citation allow-list</td>
+<td>Whether a fine-tuned model learned the adjudication behavior itself</td>
+</tr>
+<tr>
+<td>Model S</td>
+<td>Scaffolded structure chosen for the experiment</td>
+<td>Whether an adapter can learn a bounded task shape or expose useful failure modes</td>
+</tr>
+</tbody></table>
+<p>The same output vocabulary does not make the proof standards interchangeable. Model B cannot inherit Model A’s citations and still be called standalone. Model S cannot receive structural help and be reported as autonomous. Model A cannot report a guardrails-on score as the model’s own capability.</p>
+<h2 id="10-build-the-evidence-in-the-right-order">10. Build the evidence in the right order</h2><p>The next engineering sequence is already defined:</p>
+<ol>
+<li>run the handbook Model A seeds on the development split;</li>
+<li>optimize only against development evidence;</li>
+<li>freeze the candidate;</li>
+<li>run proof mode once on the blind split;</li>
+<li>publish the report with rule, reporting-policy, case, label, and candidate provenance;</li>
+<li>run the production guardrails-on sanity check separately;</li>
+<li>begin the handbook-native Model B training only after Model A certifies; and</li>
+<li>compare the lanes on matched evidence with their support clearly labeled.</li>
+</ol>
+<p>The current repository contains the deterministic machinery, evaluation contracts, golden splits, and Model B curriculum needed for that sequence. It does not yet contain the completed handbook Model A certification report, and the Model B handbook retrain remains deferred.</p>
+<h2 id="11-the-comparison-exposes-an-architectural-failure-mode">11. The comparison exposes an architectural failure mode</h2><p>The SNH AI integrity review found 2,410 internally inconsistent rationale rows in a 24,287-row export. The dominant pattern was not malformed prose; it was unresolved rule competition. A response could cite no-limit conviction logic and still apply a generic seven-year suppression, or invoke a traffic exclusion without a traffic signal in the parsed evidence.</p>
+<p>The harness closes that path at several layers:</p>
+<ul>
+<li>most-specific handbook matching resolves precedence before the final branch;</li>
+<li>each returned court case is adjudicated separately before search-level aggregation;</li>
+<li>decisive citations must come from the selected case-specific evidence;</li>
+<li>rule hashes bind the decision to a named policy version;</li>
+<li>schema and verifier errors fail closed to <code>ManualReview</code>; and</li>
+<li>the trace distinguishes model reasoning from the harness&#39;s permit/block decision.</li>
+</ul>
+<p>The measured advantage is therefore explainable. Model A&#39;s roughly fourfold reduction in recall-side misses against SNH AI on the 1,440 UBS-reported searches did not come from accepting more unsupported answers. It came from giving ambiguity a controlled reasoning path and giving contradictions nowhere to hide.</p>
+<h2 id="the-engineering-principle">The engineering principle</h2><p>The most important component is not a particular model. It is the handoff:</p>
+<pre><code class="language-text">policy defines
+→ evidence bounds
+→ software resolves
+→ AI interprets
+→ verifier challenges
+→ uncertainty stops
+→ trace explains
+</code></pre>
+<p>Better models can improve the interpretation step without renegotiating what counts as policy, proof, or a safe failure. That is what makes the system both ambitious and replaceable.</p>
+</article>
+    <nav class="next-reading" aria-label="More essays">
+      <p>Continue the series</p>
+      <a href="comparison.html"><span>Comparison</span>Can AI Beat Deterministic Code?</a><a href="executive.html"><span>Executive brief</span>The Compliance Decision System</a><a href="philosophy.html"><span>Philosophy</span>Authority Must Be Earned</a>
+    </nav>
+  </main>
+    <footer class="site-footer" id="evidence-note">
+    <p><strong>Evidence boundary.</strong> Results are retrospective comparisons against UBS historical outcomes and the current UBS procedural-guide mirror. They are not independent legal validation or authorization for autonomous production decisions.</p>
+    <p>A Wright Original · Built by SNH Strategic Initiatives · Public site contains no applicant data.</p>
+  </footer>
+  </div>
+  <script src="site.js"></script>
+</body>
+</html>

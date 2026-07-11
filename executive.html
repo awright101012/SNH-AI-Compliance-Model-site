@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The guide contains the policy. The case contains the evidence. The system turns both into a decision the operation can inspect and trust.">
+  <meta name="theme-color" content="#f6f7f2">
+  <title>The Compliance Decision System · The Compliance Decision System</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="article-page executive-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page-frame">
+    <header class="site-header">
+    <a class="site-name" href="index.html">The Compliance Decision System</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" aria-label="Primary navigation">
+      <a href="comparison.html">Comparison</a><a href="executive.html" aria-current="page">Executive brief</a><a href="engineering.html">Engineering</a><a href="philosophy.html">Philosophy</a>
+    </nav>
+  </header>
+    <main id="main" class="article-main">
+    <header class="article-header">
+      <p class="series-label">Executive brief · July 2026 · 7 min</p>
+      <h1>The Compliance Decision System</h1>
+      <p class="article-dek">The guide contains the policy. The case contains the evidence. The system turns both into a decision the operation can inspect and trust.</p>
+    </header>
+    <figure class="hero-art"><img src="assets/executive-hero.webp" alt="A procedural guide becoming a verified decision record."></figure>
+    <aside class="article-proof"><figure class="architecture-figure flow-figure">
+    <figcaption><strong>One case, one governed handoff</strong><span>Every actor owns a different verb.</span></figcaption>
+    <div class="flow-line">
+      <div><b>Handbook</b><span>defines</span></div>
+      <div><b>Evidence</b><span>bounds</span></div>
+      <div><b>Rules</b><span>resolve</span></div>
+      <div><b>Model</b><span>interprets</span></div>
+      <div><b>Verifier</b><span>challenges</span></div>
+      <div><b>Trace</b><span>explains</span></div>
+    </div>
+    <p class="manual-branch">If the chain breaks, the only destination is <strong>ManualReview</strong>.</p>
+  </figure></aside>
+    <article class="article-body"><h2 id="the-guide-contains-the-policy-the-case-contains-the-evidence-neither-by-itself-produces-a-decision-the-operation-can-trust">The guide contains the policy. The case contains the evidence. Neither, by itself, produces a decision the operation can trust.</h2><p>Public-records compliance work sits between two bad shortcuts. A fixed rule can be safe but too brittle for a messy record. A language model can interpret the mess but make a polished claim that the evidence does not support. The SNH Compliance Decision System is built to hold the line between them: turn the UBS procedural guide into an executable decision contract, let AI reason only inside that contract, and send uncertainty to a person with the evidence attached.</p>
+<p><strong>Source of truth:</strong> the UBS Court Research Procedural Guide operational mirror<br><strong>Current control architecture:</strong> Model A, an LLM working inside a rule, tool, verifier, and trace harness<br><strong>Current proof status:</strong> deterministic handbook machinery is built; the ≥0.95 blind Model A proof remains to be earned<br><strong>Next gate:</strong> certify Model A, then train and compare the handbook-native standalone model</p>
+<h2 id="the-operating-problem-is-not-a-lack-of-rules">The operating problem is not a lack of rules</h2><p>The rules exist. The difficulty is applying them consistently to cases whose evidence is incomplete, normalized from different source shapes, or balanced on a boundary that changes the result.</p>
+<p>A compliant decision may depend on identity sufficiency, record relief, offense exclusions, disposition classification, timing, state treatment, salary information, and whether missing facts require review. Those questions have an order. A correct answer reached through the wrong sequence can still conceal a dangerous shortcut. A confident answer without a real source pointer is not an auditable answer at all.</p>
+<p>Traditional software handles exact branches well, but procedural guides contain conditional language, aliases, exceptions, and evidence gaps. A language model can navigate those ambiguities, but fluency is not authority. If the model may invent a citation, skip a gate, or convert missing evidence into certainty, it has not solved compliance. It has made the failure easier to read.</p>
+<p>The shared missing layer is a decision system that knows four things at once:</p>
+<ol>
+<li>what the normalized case evidence says;</li>
+<li>which handbook rules govern the case;</li>
+<li>how far the evidence permits the decision to go; and</li>
+<li>what must be preserved so another person can reconstruct the answer.</li>
+</ol>
+<p>That is what this repository builds.</p>
+<h2 id="what-was-built-intelligence-inside-a-control-system">What was built: intelligence inside a control system</h2><p>The live rule source is <code>rules/handbook.v1.json</code>, an executable mirror of the UBS Court Research Procedural Guide. It is deliberately an operational specification, not a claim to be an independent statement of the legal ceiling. The decision engine applies the guide in its required order: identity, relief, offense exclusions, then disposition.</p>
+<p>Around that source sits Model A, the production and control architecture:</p>
+<pre><code class="language-text">normalized, synthetic-safe case
+→ select the relevant handbook rules
+→ apply deterministic decisions and hard stops where the evidence is conclusive
+→ let the reasoner handle the bounded remainder
+→ verify schema, provenance, citations, and review conditions
+→ fail closed to ManualReview when the contract does not hold
+→ emit a trace that preserves the evidence and decision path
+</code></pre>
+<p>The division of labor is intentional.</p>
+<ul>
+<li>The handbook defines the operating policy.</li>
+<li>Deterministic code resolves exact, testable branches.</li>
+<li>The LLM reasons across the cases that still require interpretation.</li>
+<li>The verifier decides whether the answer satisfies the contract.</li>
+<li><code>ManualReview</code> preserves uncertainty instead of hiding it.</li>
+<li>The trace gives reviewers and engineers a record they can inspect and replay.</li>
+</ul>
+<p>The model may propose a decision. It cannot grant itself permission to bypass the handbook, cite outside the allowed namespace, or turn a verifier failure into a final answer.</p>
+<h2 id="three-lanes-answer-three-different-questions">Three lanes answer three different questions</h2><p>This program does not treat every model result as the same kind of proof.</p>
+<h3 id="model-a-can-ai-operate-safely-with-tools-and-controls">Model A — can AI operate safely with tools and controls?</h3><p>Model A is the likely production architecture. It gives a general reasoner selected handbook evidence, bounded tools, deterministic guardrails, a locked output contract, and independent verification. Its strengths are hot-patchable rules, per-decision provenance, fail-closed behavior, and a clean place to optimize prompts and tool use without mutating the policy source.</p>
+<p>The certification target is at least 0.95 balanced accuracy on the sealed handbook blind split with guardrails off, while also passing the safety, leakage, schema, citation, and abstention gates. The guardrails-on path is the production safety check; it must not be presented as proof that the underlying model reasoned correctly.</p>
+<h3 id="model-b-can-the-fine-tuned-model-learn-the-adjudication-job-itself">Model B — can the fine-tuned model learn the adjudication job itself?</h3><p>Model B is the standalone experiment. It receives normalized facts without rule text, retrieval, or an allowed-citation list. Its purpose is to test whether a bounded fine-tuned model can learn the handbook’s decision sequence, abstention behavior, and canonical citation discipline from training.</p>
+<p>The handbook-native curriculum has been built, but training is deferred until Model A certifies. That order matters: Model A supplies the trusted decision machinery and traces from which Model B learns. Training first would freeze any unresolved source error into the model.</p>
+<h3 id="model-s-what-can-a-scaffolded-model-teach-us-quickly">Model S — what can a scaffolded model teach us quickly?</h3><p>Model S is the tactical learning lane. Structure may be supplied so the team can test adapters, output contracts, curriculum choices, and failure modes quickly. A strong Model S result is useful evidence about training mechanics. It is not proof that a standalone model can perform the entire job.</p>
+<p>The three lanes are complementary only if their labels remain honest. A scaffolded score, a standalone score, a clean evidence-only Model A score, and a full production-harness score answer different questions.</p>
+<h2 id="what-is-proven-and-what-is-not">What is proven, and what is not</h2><p>The repository already establishes the system shape:</p>
+<ul>
+<li>one live handbook source for Model A;</li>
+<li>deterministic handbook decision logic and acceptance fixtures;</li>
+<li>normalized, masked, or synthetic model-facing data;</li>
+<li>a verifier that checks the decision schema, handbook citation namespace, selected-rule membership, rule hashes, and audit contract;</li>
+<li>fail-closed conversion to <code>ManualReview</code> when verification fails;</li>
+<li>immutable evaluation boundaries and promotion failures that prevent an unsafe candidate from being crowned;</li>
+<li>a handbook-native Model B curriculum with leakage, deduplication, and held-out family controls.</li>
+</ul>
+<p>The repository does <strong>not</strong> yet establish that a handbook Model A candidate has passed the ≥0.95 blind proof. It does not establish that the handbook-native Model B has been trained or certified. It does not establish that Model S performance transfers to a standalone adjudicator. And it does not authorize autonomous production decisions.</p>
+<p>That boundary is not a weakness in the program. It is the mechanism that keeps an experiment from becoming a claim before the evidence exists.</p>
+<h2 id="the-existing-snh-ai-comparison-shows-why-the-architecture-matters">The existing SNH AI comparison shows why the architecture matters</h2><p>On the matched recall-side workbook, SNH AI cleared 93 of 1,440 searches that UBS ultimately reported, a 6.5% miss rate. Model A cleared 24, or 1.7%—roughly four times fewer misses. The fine-tuned 9B cleared 17, or 1.2%, on the same slice.</p>
+<p>The difference was not only the final score. A separate audit found internal consistency issues in 2,410 of 24,287 exported SNH AI rationale rows. In those cases, the answer, reasoning, parsed facts, or cited rule did not fully reconcile. Most of the high-confidence contradictions also overlapped a retired rule/template family or its related generic seven-year suppression pattern.</p>
+<p>Our system was built to prevent that class of failure: one current handbook source, fixed precedence, per-case adjudication, citations that must control the answer, and a verifier that converts unsupported certainty into review. The full comparison and its limitations are documented in <a href="comparison.html"><code>Can AI Beat Deterministic Code?</code></a>.</p>
+<h2 id="the-decision-now">The decision now</h2><p>The immediate decision is not which model wins. It is whether to complete the common proof system that makes the comparison meaningful.</p>
+<p>The sequence is straightforward:</p>
+<ol>
+<li>certify Model A on the frozen handbook blind split and publish both passing and failing evidence;</li>
+<li>keep the production guardrails-on score separate from the clean model-under-test score;</li>
+<li>use the certified handbook machinery to begin the Model B retrain;</li>
+<li>compare Model A, Model B, and Model S on matched cases without hiding scaffolding or harness support; and</li>
+<li>grant operational authority only to the architecture whose own evidence supports it.</li>
+</ol>
+<p>The larger ambition is not a model that sounds certain. It is a compliance operation in which every decision is bounded by policy, supported by evidence, honest about uncertainty, and reproducible after the fact.</p>
+<p>That is how AI becomes useful here: not by replacing the decision contract, but by becoming capable inside it.</p>
+<h2 id="evidence-boundary">Evidence boundary</h2><p>This brief describes repository capabilities and declared evaluation gates. It makes no claim of independent legal validation, completed Model A certification, completed handbook Model B training, or autonomous production approval. Raw UBS XML and historical person or case rows remain local evidence and are not model-facing training material.</p>
+</article>
+    <nav class="next-reading" aria-label="More essays">
+      <p>Continue the series</p>
+      <a href="comparison.html"><span>Comparison</span>Can AI Beat Deterministic Code?</a><a href="engineering.html"><span>Engineering</span>Building a System That Can Say ‘Not Yet’</a><a href="philosophy.html"><span>Philosophy</span>Authority Must Be Earned</a>
+    </nav>
+  </main>
+    <footer class="site-footer" id="evidence-note">
+    <p><strong>Evidence boundary.</strong> Results are retrospective comparisons against UBS historical outcomes and the current UBS procedural-guide mirror. They are not independent legal validation or authorization for autonomous production decisions.</p>
+    <p>A Wright Original · Built by SNH Strategic Initiatives · Public site contains no applicant data.</p>
+  </footer>
+  </div>
+  <script src="site.js"></script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A governed AI system built in roughly a week produced about four times fewer recall-side misses than SNH AI—and made the decision path easier to audit.">
+  <meta name="theme-color" content="#f6f7f2">
+  <title>Can AI Beat Deterministic Code? · The Compliance Decision System</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="article-page comparison-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page-frame">
+    <header class="site-header">
+    <a class="site-name" href="index.html">The Compliance Decision System</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" aria-label="Primary navigation">
+      <a href="comparison.html" aria-current="page">Comparison</a><a href="executive.html">Executive brief</a><a href="engineering.html">Engineering</a><a href="philosophy.html">Philosophy</a>
+    </nav>
+  </header>
+    <main id="main" class="article-main">
+    <header class="article-header">
+      <p class="series-label">Comparison · July 2026 · 9 min</p>
+      <h1>Can AI Beat Deterministic Code?</h1>
+      <p class="article-dek">A governed AI system built in roughly a week produced about four times fewer recall-side misses than SNH AI—and made the decision path easier to audit.</p>
+    </header>
+    <figure class="hero-art"><img src="assets/comparison-hero.webp" alt="Rigid rule stacks compared with a governed, verified decision path."></figure>
+    <aside class="article-proof"><figure class="data-figure recall-figure">
+    <figcaption><strong>Recall-side misses on 1,440 UBS-reported searches</strong><span>Lower is better · matched source workbook</span></figcaption>
+    <div class="bar-row"><span>SNH AI</span><div class="bar-track"><i class="bar snh" style="--value:93"></i></div><b>93</b><em>6.5%</em></div>
+    <div class="bar-row"><span>Model A</span><div class="bar-track"><i class="bar model-a" style="--value:24"></i></div><b>24</b><em>1.7%</em></div>
+    <div class="bar-row"><span>Fine-tuned 9B</span><div class="bar-track"><i class="bar model-b" style="--value:17"></i></div><b>17</b><em>1.2%</em></div>
+    <p class="figure-note">This is a positive-only recall slice, not an overall accuracy score.</p>
+  </figure><figure class="architecture-figure comparison-architecture">
+    <figcaption><strong>Why the governed system behaves differently</strong><span>The advantage is the handoff, not a single model.</span></figcaption>
+    <div class="architecture-columns">
+      <section>
+        <h3>Accumulated deterministic path</h3>
+        <ol class="stacked-rules">
+          <li>Rule and classifier hits</li>
+          <li>Response templates</li>
+          <li>Mixed rule families</li>
+          <li class="risk">Final reconciliation can fail</li>
+        </ol>
+      </section>
+      <div class="versus" aria-hidden="true">versus</div>
+      <section>
+        <h3>Governed AI path</h3>
+        <ol class="governed-flow">
+          <li>Normalize each case</li>
+          <li>Select current handbook rules</li>
+          <li>Reason inside the evidence packet</li>
+          <li>Verify citations and provenance</li>
+          <li>Decide or route to review</li>
+        </ol>
+      </section>
+    </div>
+  </figure></aside>
+    <article class="article-body"><h2 id="in-one-week-a-governed-ai-system-produced-fewer-recall-side-misses-stronger-handbook-alignment-and-a-cleaner-audit-path-than-a-deterministic-system-that-had-been-developed-for-months">In one week, a governed AI system produced fewer recall-side misses, stronger handbook alignment, and a cleaner audit path than a deterministic system that had been developed for months.</h2><p>The provocative answer is yes—but only if we are precise about what won.</p>
+<p>This was not a contest between an unconstrained chatbot and carefully written software. It was a comparison between three different ways to apply the same compliance policy:</p>
+<ol>
+<li><strong>SNH AI:</strong> a deterministic rule and classifier system whose logic is encoded in rules, templates, and application behavior;</li>
+<li><strong>Model A:</strong> a language model reasoning open-book over selected UBS handbook rules, inside a structured output and verification contract; and</li>
+<li><strong>Model B:</strong> a fine-tuned 9B model answering closed-book from patterns learned from synthetic handbook examples.</li>
+</ol>
+<p>The first working model lanes were stood up in roughly 48 hours. Within the week, the team had converted the handbook into an executable rule source, built the harness, trained the standalone experiment, and run the comparison. The point was not that a week of work replaces months of engineering. The point was that the right architecture made the policy legible, testable, and rapidly improvable.</p>
+<p>On the clearest matched recall-side test, the new systems did beat the existing deterministic path.</p>
+<h2 id="the-shortest-version">The shortest version</h2><p>The comparison workbook isolates 1,440 searches that UBS ultimately reported. A miss on this slice means the system said <code>Not Reportable</code> where the final UBS workflow reported a hit.</p>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th align="right">Recall-side misses</th>
+<th align="right">Miss rate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SNH AI</td>
+<td align="right">93</td>
+<td align="right">6.5%</td>
+</tr>
+<tr>
+<td>Model A, open-book</td>
+<td align="right">24</td>
+<td align="right">1.7%</td>
+</tr>
+<tr>
+<td>Model B, fine-tuned 9B</td>
+<td align="right">17</td>
+<td align="right">1.2%</td>
+</tr>
+</tbody></table>
+<p>Model A produced roughly four times fewer misses than SNH AI. The standalone 9B produced still fewer on this slice.</p>
+<p>That does not prove universal superiority. It is a recall-side test: every row was something UBS reported, so it measures missed positives rather than precision on the much larger set of clears. But it answers an important operating question directly. When UBS ultimately reported a record, the new systems were substantially less likely to clear it incorrectly.</p>
+<p>The larger replay adds context. Across 24,641 real vendor-hit searches containing 82,543 returned court cases, the open-book Model A agreed with the handbook on 96.1% of its final decisions, compared with 61.5% for SNH AI in the deck&#39;s matched rulebook view. Its confirmed judgment-error rate was 0.8% across 11,773 final decisions, versus 1.63% across 18,571 SNH AI final decisions.</p>
+<p>Those denominators differ because the systems defer at different rates, which is why both agreement and decisiveness must be shown. Model A was also more decisive on UBS-reported searches: 65.5% final calls versus 51.4% for SNH AI. The model was not winning by sending everything to a person.</p>
+<h2 id="the-result-was-surprising-for-the-right-reason">The result was surprising for the right reason</h2><p>The instinctive story is that the language model was simply smarter. That is not what the evidence shows.</p>
+<p>The advantage came from turning one large, tangled decision into a sequence of smaller contracts:</p>
+<pre><code class="language-text">normalize the source record
+→ adjudicate every returned case separately
+→ retrieve the handbook rules that govern that case
+→ walk the gates in a fixed order
+→ require a structured decision and citations
+→ verify the answer independently
+→ aggregate the cases with a safety-first rule
+→ send unsupported conclusions to ManualReview
+</code></pre>
+<p>The language model handled ambiguity. The architecture prevented that ambiguity from erasing policy order, evidence gaps, or provenance.</p>
+<p>That distinction matters because the most damaging SNH AI failures did not look like random classification mistakes. They looked like unresolved contradictions inside the answer itself.</p>
+<h2 id="the-existing-system-often-disagreed-with-itself">The existing system often disagreed with itself</h2><p>A follow-up review examined 24,287 exported SNH AI rationale rows. It found 2,410 rows—9.9%—with at least one internal consistency issue. In those rows, the final decision, written rationale, parsed facts, or cited rule did not fully reconcile.</p>
+<p>The clearest pattern was a response citing logic that convictions had no reporting time limit, then suppressing the same record under a generic seven-year rule. Other recurring patterns included:</p>
+<ul>
+<li>age or lookback reasoning when the parsed dates were missing;</li>
+<li>traffic exclusions without a traffic signal in the parsed evidence;</li>
+<li>disposition or pending language that did not match the payload;</li>
+<li>reportable and not-reportable reasoning inside the same response; and</li>
+<li>citations that appeared in the answer without controlling the conclusion.</li>
+</ul>
+<p>These are more serious than ordinary score deltas. A wrong answer can be reviewed. An answer whose conclusion and support point in different directions is difficult to review, audit, or defend because the reviewer cannot tell which logic actually controlled.</p>
+<p>The follow-up workbook also found strong overlap with a retired rule/template family from the earlier compliance-engine work. Across all 2,410 bad rows, 94.4% overlapped either the suspect outdated template logic or the related generic seven-year suppression family. Among the 675 high-confidence contradiction or semantic-conflict rows, the overlap was 96.0%.</p>
+<p>That is evidence of strong textual and rule-family lineage. It is <strong>not</strong>, by itself, proof of source-code copying or runtime provenance. The fair conclusion is narrower and more useful: stale or unreconciled rule logic appears to be a material driver of the inconsistency pattern.</p>
+<h2 id="why-our-architecture-performed-better">Why our architecture performed better</h2><h3 id="1-one-current-policy-source">1. One current policy source</h3><p>Our Model A lane reads a versioned operational mirror of the current UBS Court Research Procedural Guide. The model does not rely on rule snippets accumulated across old templates and later edits. The active policy is named, hashed, testable, and replaceable.</p>
+<p>When the handbook changes, the source artifact changes first. Tests and evaluation rows change with it. The model can then be re-evaluated against the new version. Policy does not remain hidden inside an old response template.</p>
+<h3 id="2-precedence-is-executable">2. Precedence is executable</h3><p>The handbook is applied in an explicit order: identity, relief, offense exclusions, then disposition and timing. A generic rule cannot quietly override a more specific controlling branch because the system resolves the branch before the model&#39;s final answer is allowed to ship.</p>
+<p>This directly addresses the no-limit-plus-seven-year contradiction found in the SNH AI outputs.</p>
+<h3 id="3-every-court-case-gets-its-own-decision">3. Every court case gets its own decision</h3><p>A search may contain several court cases or charges. Earlier primary-case approaches could make one decision stand in for the whole search. The current architecture adjudicates each returned case separately, preserves its facts and citations, then uses a safety-first rollup: any disclosable case makes the search disclosable; otherwise review outranks exemption.</p>
+<p>That change alone collapsed a large apparent conflict queue when the full sibling-case evidence was considered.</p>
+<h3 id="4-citations-are-part-of-the-contract">4. Citations are part of the contract</h3><p>In our system, a citation is not decorative legal language. It must be a selected pointer into the active handbook, must belong to the evidence packet for that case, and must survive independent verifier checks. A model cannot invent a source or attach a citation from an unrelated branch without triggering review.</p>
+<h3 id="5-uncertainty-has-a-real-destination">5. Uncertainty has a real destination</h3><p>Missing dates, weak identity, unclassifiable dispositions, contradictory no-hit signals, and verifier failures are not coerced into a clean binary answer. They become <code>ManualReview</code> with the reason preserved.</p>
+<p>The system is therefore allowed to be uncertain without becoming silent. On the matched 1,440-search readout, it produced a decision or controlled abstention for every row. SNH AI had a much larger coverage gap in the earlier comparison.</p>
+<h3 id="6-the-model-and-the-policy-can-improve-independently">6. The model and the policy can improve independently</h3><p>Model A is open-book. Its rules can be updated without retraining the model, and the model can be replaced without rewriting the policy. Model B tests the opposite extreme: whether a small model can learn the adjudication behavior well enough to work closed-book.</p>
+<p>That separation made fast iteration possible. The system did not need months of accumulated templates before it could be useful; it needed a clean policy contract and an evaluation loop willing to expose failures.</p>
+<h2 id="did-ai-beat-deterministic-code-or-did-better-engineering-beat-brittle-code">Did AI beat deterministic code—or did better engineering beat brittle code?</h2><p>The honest answer is both.</p>
+<p>The model added real value. It could interpret normalized evidence, reason across conditional handbook language, and commit on cases where a deterministic engine would otherwise defer. The week-one Model A was more decisive than SNH AI on UBS-reported searches while also producing fewer direct misses.</p>
+<p>But deterministic code still owns the most important safety boundaries. Exact no-hit handling, identity floors, confirmed relief, prohibited citations, schema enforcement, and fail-closed behavior remain software contracts. In the production design, the model never receives authority to outvote them.</p>
+<p>So the winning system is not “AI instead of code.” It is a deliberate split:</p>
+<ul>
+<li>deterministic code owns what must be exact;</li>
+<li>AI handles the ambiguity that would make pure rules brittle;</li>
+<li>the verifier challenges both the form and support of the model&#39;s answer; and</li>
+<li>a person owns the cases where the evidence still does not justify a final call.</li>
+</ul>
+<p>The result is better than either component alone.</p>
+<h2 id="what-the-standalone-model-proved">What the standalone model proved</h2><p>The fine-tuned 9B took the harder exam. It received normalized facts with no rulebook in the prompt, no retrieval, and no guardrails. The rules had to live in its weights.</p>
+<p>Across the full replay it matched the handbook engine on 93.3% of individual court cases and 92.7% of search-level decisions, with zero output-format failures across 82,543 case outputs. On the recall-side workbook it missed 17 of 1,440 UBS-reported searches, compared with SNH AI&#39;s 93.</p>
+<p>It did not win every metric. Its confirmed-error rate in the deck was 2.2%, above SNH AI&#39;s 1.63%, and it was less decisive than the larger open-book Model A. That is why it remains a standalone research lane rather than the control architecture.</p>
+<p>Its importance is feasibility: a small model trained from synthetic handbook examples could learn most of the decision shape in a handful of iterations, on one workstation-class GPU, without training on real people or historical case rows.</p>
+<h2 id="what-is-proven-and-what-is-not">What is proven—and what is not</h2><p>The comparison supports four conclusions:</p>
+<ol>
+<li>A governed language-model system can be built quickly and outperform the existing deterministic system on matched recall-side misses and handbook agreement.</li>
+<li>The advantage comes from explicit policy ownership, per-case adjudication, reconciliation, verification, and controlled abstention—not from unconstrained generation.</li>
+<li>A small fine-tuned model can learn much of the same decision behavior without runtime rule retrieval, though it has not replaced the controlled architecture.</li>
+<li>The existing SNH AI output has material internal-consistency and stale-rule-lineage concerns that should be addressed before its explanations are treated as audit-grade support.</li>
+</ol>
+<p>The comparison does <strong>not</strong> establish that our models are legally correct independent of the UBS handbook, that every UBS historical final action is the right label, or that any model should make autonomous production decisions today. Historical operations may include human judgment or client handling not visible in the model response. Counsel must rule on the remaining policy disagreements.</p>
+<h2 id="the-real-one-week-lesson">The real one-week lesson</h2><p>The lesson is not that months of engineering were wasted or that language models make deterministic systems obsolete.</p>
+<p>It is that compliance AI becomes faster to build when the policy is treated as a versioned product rather than accumulated application behavior. Once the handbook was executable, every other part of the program accelerated: synthetic training, replay, error analysis, model replacement, and audit.</p>
+<p>In a week, the team did not finish compliance automation. It proved a better way to build it.</p>
+</article>
+    <nav class="next-reading" aria-label="More essays">
+      <p>Continue the series</p>
+      <a href="executive.html"><span>Executive brief</span>The Compliance Decision System</a><a href="engineering.html"><span>Engineering</span>Building a System That Can Say ‘Not Yet’</a><a href="philosophy.html"><span>Philosophy</span>Authority Must Be Earned</a>
+    </nav>
+  </main>
+    <footer class="site-footer" id="evidence-note">
+    <p><strong>Evidence boundary.</strong> Results are retrospective comparisons against UBS historical outcomes and the current UBS procedural-guide mirror. They are not independent legal validation or authorization for autonomous production decisions.</p>
+    <p>A Wright Original · Built by SNH Strategic Initiatives · Public site contains no applicant data.</p>
+  </footer>
+  </div>
+  <script src="site.js"></script>
+</body>
+</html>
