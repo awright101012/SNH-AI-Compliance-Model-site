@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Rules own what must be exact. Models handle bounded ambiguity. Every increase in authority is purchased with evidence.">
+  <meta name="description" content="Compact open-source models can learn a company’s approved adjudication behavior and run inside company-controlled infrastructure.">
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#FAF9F5">
-  <title>Authority Must Be Earned · The Compliance Decision System</title>
+  <title>A Private Compliance Model for Each Company · SNH AI Compliance Engines</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -15,113 +15,101 @@
   <div class="page-frame">
     <header class="site-header">
     <div class="topbar">
-      <a class="site-name" href="index.html">SNH AI <span>·</span> Compliance Model</a>
-      <span class="edition">The Compliance Decision System · July 2026</span>
+      <a class="site-name" href="index.html">SNH AI <span>·</span> Compliance Engines</a>
+      <span class="edition">Company-specific reasoning · July 2026</span>
     </div>
     <nav id="site-nav" aria-label="Essay navigation">
       <a href="index.html">Series</a>
-      <a href="comparison.html">Comparison</a><a href="executive.html">Executive brief</a><a href="engineering.html">Engineering</a><a href="philosophy.html" aria-current="page">Philosophy</a>
+      <a href="executive.html">Overview</a><a href="engineering.html">Architecture</a><a href="philosophy.html" aria-current="page">Fine-tuned SLM</a>
     </nav>
   </header>
     <main id="main" class="article-main">
     <header class="article-header masthead">
-      <p class="series-label">Philosophy · July 2026 · 8 min</p>
-      <h1>Authority Must Be Earned</h1>
-      <p class="article-dek">Rules own what must be exact. Models handle bounded ambiguity. Every increase in authority is purchased with evidence.</p>
+      <p class="series-label">Fine-tuned SLM · July 2026 · 6 min</p>
+      <h1>A Private Compliance Model for Each Company</h1>
+      <p class="article-dek">Compact open-source models can learn a company’s approved adjudication behavior and run inside company-controlled infrastructure.</p>
       <div class="byline"><span>SNH Strategic Initiatives</span><span>A Wright Original</span><span>Research brief · July 2026</span></div>
     </header>
+    
     <figure class="hero-art"><img src="assets/philosophy-hero.webp" alt="A sequence of evidence gates leading toward bounded authority."></figure>
     <aside class="article-proof"><figure class="architecture-figure autonomy-figure">
-    <figcaption><strong>Authority increases only when the evidence does</strong><span>The roadmap names the destination; the gates decide the pace.</span></figcaption>
-    <ol><li><span>1</span><b>Encode</b><p>Policy becomes a versioned contract</p></li><li><span>2</span><b>Observe</b><p>Synthetic and replay evidence</p></li><li><span>3</span><b>Assist</b><p>Recommendations with review</p></li><li><span>4</span><b>Compare</b><p>Matched held-out proof</p></li><li><span>5</span><b>Delegate</b><p>One narrow role at a time</p></li></ol>
+    <figcaption><strong>From company guide to private fine-tuned SLM</strong><span>The architecture repeats; the policy and validation evidence are company-specific.</span></figcaption>
+    <ol><li><span>1</span><b>Guide</b><p>Capture company-specific policy</p></li><li><span>2</span><b>Contract</b><p>Make decisions testable</p></li><li><span>3</span><b>Synthesize</b><p>Generate private-safe cases</p></li><li><span>4</span><b>Fine-tune</b><p>Teach a compact open model</p></li><li><span>5</span><b>Deploy</b><p>Run inside company control</p></li></ol>
   </figure></aside>
-    <article class="article-body"><h2 id="a-design-philosophy-for-ai-in-compliance-casework">A design philosophy for AI in compliance casework</h2><p>Compliance casework tempts two kinds of overconfidence. The first says that every decision can be reduced to a fixed rule. The second says that a sufficiently capable model can absorb the rules and handle the rest.</p>
-<p>Both miss the actual shape of the work.</p>
-<p>The policy is structured, but the evidence is messy. The model can interpret ambiguity, but it does not own the policy. The final answer must be explainable, but an explanation can still be wrong. A system worthy of authority must therefore do more than produce the right label. It must preserve the boundary between policy, evidence, reasoning, verification, and human judgment.</p>
-<p>The philosophy of this repository is simple:</p>
-<blockquote>
-<p>The guide defines the operating policy. Software enforces the exact boundaries. Models handle bounded ambiguity. Verifiers challenge the answer. People own what the evidence cannot settle.</p>
-</blockquote>
-<p>Everything else follows from that division.</p>
-<h2 id="1-separate-capability-from-authority">1. Separate capability from authority</h2><p>A model may be capable of reading a difficult case and still lack authority to decide it. Capability is empirical: can the model reach the right answer on evidence it has not seen? Authority is institutional: under what conditions may that answer change real work?</p>
-<p>The two should never rise together automatically.</p>
-<p>In this system, a model earns capability through held-out evaluation. The surrounding architecture earns trust through source control, deterministic gates, schema enforcement, citation checks, fail-closed behavior, and traces. Operational authority comes later and must be granted to a particular lane for a particular use.</p>
-<p>A better benchmark score does not repeal the verifier. A fluent explanation does not create missing evidence. A fine-tuned model does not become the rulebook merely because it can recite it.</p>
-<h2 id="2-treat-the-source-of-truth-as-a-named-choice">2. Treat the source of truth as a named choice</h2><p>The live Model A source is an operational mirror of the UBS Court Research Procedural Guide. The repository says this plainly, including where that operational posture differs from a separate legal-ceiling interpretation.</p>
-<p>That honesty matters. Every compliance system answers a question relative to a source of authority. If the source changes—from a procedural guide to counsel-approved legal rules—the labels, tests, traces, and model claims must change with it.</p>
-<p>The rulebook is therefore versioned and hashed. Decisions cite stable handbook pointers. The model is not allowed to blur an operational instruction into an independent claim about the law.</p>
-<p>Provenance begins before the model call. It begins by naming which truth the system has been built to reproduce.</p>
-<h2 id="3-make-abstention-a-decision-not-an-embarrassment">3. Make abstention a decision, not an embarrassment</h2><p>Most AI systems treat abstention as a performance defect. In high-stakes casework, refusal is part of competence.</p>
-<p><code>ManualReview</code> means the system found a real boundary: insufficient identity, unresolved relief, missing disposition, contradictory no-hit evidence, uncertain timing, an unrecognized term, a verifier failure, or another condition the current evidence cannot safely settle.</p>
-<p>The point is not to maximize review. A model that sends every difficult case to a person has not learned the job. The point is to make certainty conditional on evidence and to measure both kinds of failure:</p>
-<ul>
-<li>acting when the system should have stopped; and</li>
-<li>stopping when the evidence already supported a clear answer.</li>
-</ul>
-<p>Good abstention is selective. It contracts as evidence, rules, and models improve. It never disappears merely because the product wants a cleaner automation rate.</p>
-<h2 id="4-price-every-claim-with-the-evidence-it-requires">4. Price every claim with the evidence it requires</h2><p>The program has several legitimate proof surfaces:</p>
-<ul>
-<li>deterministic acceptance tests show that code follows the encoded handbook contract;</li>
-<li>development evaluation supports iteration;</li>
-<li>a sealed blind run supports a frozen model claim;</li>
-<li>independent adjudication reduces circularity between engine labels and model scoring;</li>
-<li>a production guardrails-on run shows the behavior of the complete controlled system;</li>
-<li>a standalone Model B run shows what the fine-tuned model learned without runtime help.</li>
-</ul>
-<p>Each claim has a price. “The engine matches its acceptance contract” is cheaper than “the model generalizes.” “The model generalizes against engine labels” is cheaper than “the model agrees with independent adjudication.” “The system is safe in replay” is cheaper than “the system is approved to decide live cases.”</p>
-<p>The correct response to unpaid evidence is not softer marketing language. It is “not yet.”</p>
-<p>That is why this repository keeps the ≥0.95 Model A blind gate visible and keeps the Model B handbook retrain deferred. A roadmap may name the next layer. Only evidence may unlock it.</p>
-<h2 id="5-let-each-lane-teach-one-thing">5. Let each lane teach one thing</h2><p>The three-lane strategy is an argument against premature convergence.</p>
-<p>Model S asks how quickly a scaffolded model can learn a bounded policy shape. It is the place for tactical curriculum work, training mechanics, and rapid diagnosis. Its help must be named because its score depends on that help.</p>
-<p>Model B asks the harder question: can a fully fine-tuned model become the adjudicator with minimal runtime support? It must operate without supplied rule text, retrieval, or a citation allow-list. If it succeeds, it demonstrates learned capability. It still does not provide the same hot-patchable provenance as Model A.</p>
-<p>Model A asks the production question: can a general reasoner work inside a controllable system whose rules, tools, verifier, and trace remain external and inspectable? Its support is a feature of the architecture, not a secret to hide. But the clean model-under-test score must remain separate from the full harness score.</p>
-<p>No lane is allowed to borrow another lane’s proof standard. That discipline turns comparison into learning instead of a contest for the largest number.</p>
-<h2 id="6-prefer-systems-that-can-reject-their-own-progress">6. Prefer systems that can reject their own progress</h2><p>A useful evaluation system must be able to disappoint its builder.</p>
-<p>GEPA can improve prompts and bounded configuration, but it cannot alter the handbook, labels, schema, or blind cases. A candidate with promotion failures cannot be crowned merely because its aggregate metric improved. Model B’s curriculum is built, but training waits because the teacher system has not yet completed its own handbook certification.</p>
-<p>These gates slow visible progress. They also prevent a common failure: optimizing the measuring instrument until the project appears successful.</p>
-<p>The written rejection, the frozen split, the failed report, and the deferred training run are not administrative debris. They are part of the product’s credibility.</p>
-<p>The SNH AI comparison shows the opposite risk. In the reviewed rationale export, roughly one in ten rows carried an internal consistency issue, and most high-confidence contradictions shared a retired rule/template family or its derived seven-year pattern. A system can remain operational for months while stale logic compounds inside plausible explanations if the source, precedence, and final reconciliation are not independently enforced.</p>
-<p>This is why the model should not own policy memory by default. The open-book architecture makes the current source explicit and lets old logic die when the rule version changes. The standalone model is permitted as an experiment precisely because it must re-earn that behavior on held-out evidence.</p>
-<h2 id="7-keep-sensitive-data-outside-the-learning-story">7. Keep sensitive data outside the learning story</h2><p>Raw UBS XML and historical person or case rows are evidence for local analysis. They are not training material and should not appear in tracked narratives.</p>
-<p>The model-facing program uses synthetic, masked, or normalized representations. This is not merely a privacy concession. It forces the system to state which facts actually matter to the decision and exposes when a result depends on an unavailable or unsafe feature.</p>
-<p>A model that performs only when given uncontrolled historical text has not demonstrated deployable intelligence. It has demonstrated access.</p>
-<p>The data boundary therefore strengthens the scientific claim as well as the privacy posture.</p>
-<h2 id="8-build-an-autonomy-ladder-whose-gates-default-closed">8. Build an autonomy ladder whose gates default closed</h2><p>The path to greater authority should be staged:</p>
+    <article class="article-body"><h2 id="the-same-law-does-not-produce-the-same-operating-guide-at-every-screening-company">The same law does not produce the same operating guide at every screening company.</h2><p>Compliance programs reflect legal advice, customer obligations, risk tolerance, data sources, review operations, and years of institutional decisions. The result is a company-specific way of turning a court record into an action.</p>
+<p>That is why the future of compliance AI is unlikely to be one universal model making the same decision for every organization. A more credible future is a common architecture that can build a governed engine—and ultimately a private fine-tuned SLM—around each company’s approved procedures.</p>
+<h2 id="company-specific-does-not-mean-improvised">Company-specific does not mean improvised</h2><p>A bespoke model should not learn policy by copying historical reviewer outcomes. Historical decisions may contain old rules, inconsistent handling, or customer exceptions that no longer apply. Real case rows also create unnecessary privacy and governance risk when used as training material.</p>
+<p>The better sequence is:</p>
 <ol>
-<li><strong>Encode:</strong> convert the operating guide into a versioned rule and acceptance contract.</li>
-<li><strong>Observe:</strong> run deterministic and scaffolded experiments on synthetic or normalized cases.</li>
-<li><strong>Assist:</strong> let Model A reason inside the harness while people inspect the traces and unresolved cases.</li>
-<li><strong>Compare:</strong> certify the clean Model A lane, train Model B, and measure both on matched held-out evidence.</li>
-<li><strong>Delegate narrowly:</strong> grant a specific system a specific operational role only after its own safety and capability evidence supports that role.</li>
+<li>establish the current company guide as the operating authority;</li>
+<li>convert it into explicit decision and abstention behavior;</li>
+<li>test that behavior in an SLM with a harness;</li>
+<li>generate synthetic cases that exercise the guide’s ordinary and difficult boundaries; and</li>
+<li>fine-tune a compact model to reproduce the approved behavior.</li>
 </ol>
-<p>The ladder is not a schedule. A later stage has no date-based entitlement to begin. Each stage exists partly to create the evidence the next one needs.</p>
-<p>This is earned autonomy in its strict sense: not increasing what AI can generate, but increasing what the operation is willing to let a proven system do.</p>
-<h2 id="what-restraint-buys">What restraint buys</h2><p>This philosophy has costs. Versioned rules take work. Synthetic curricula are slower than copying historical rows. Blind splits limit iteration. Independent adjudication is expensive. A fail-closed verifier creates review traffic. Honest lane labels make some results look less impressive.</p>
-<p>The return is a system whose failures are legible.</p>
+<p>This teaches the model what the organization intends to do, not merely what happened in the past.</p>
+<h2 id="what-the-fine-tuned-slm-learns">What the fine-tuned SLM learns</h2><p>The fine-tuned SLM is trained to do more than classify a record. It learns a structured adjudication discipline:</p>
 <ul>
-<li>A rule error points to a versioned source and test.</li>
-<li>A normalization error points to an adapter boundary.</li>
-<li>A reasoning error appears in a held-out comparison.</li>
-<li>A citation error is blocked before it becomes authority.</li>
-<li>An evidence gap becomes <code>ManualReview</code> rather than invented certainty.</li>
-<li>A model replacement does not require rebuilding the policy and trace contract from scratch.</li>
+<li>identify which facts are decisive;</li>
+<li>follow the company’s required policy sequence;</li>
+<li>distinguish convictions, non-convictions, pending matters, relief, and exclusions;</li>
+<li>apply timing and jurisdiction rules only when their prerequisites are present;</li>
+<li>explain how the facts connect to the outcome;</li>
+<li>produce a stable machine-readable response; and</li>
+<li>abstain when the evidence does not support a final decision.</li>
 </ul>
-<p>In regulated work, legibility is not secondary to intelligence. It is what makes intelligence governable.</p>
-<h2 id="the-durable-idea">The durable idea</h2><p>Models will change. The preferred size, provider, tuning method, and tool protocol will change. The handbook will be revised. Some decisions now handled by a reasoner will become deterministic precedent; some rules now encoded may require new interpretation.</p>
-<p>The durable architecture is the separation of powers:</p>
-<pre><code class="language-text">source policy is versioned
-evidence is bounded
-exact rules are executable
-ambiguous cases are reasoned over
-claims are independently checked
-uncertainty has a safe destination
-every permitted decision leaves a trace
+<p>The intended behavior resembles a trained reviewer using an operating guide: inspect the evidence, apply the relevant section, document the reasoning, and stop when a required fact is missing. The model is not a person and does not replace legal judgment; it reproduces a bounded adjudication process under measurable constraints.</p>
+<h2 id="why-small-open-source-models-matter">Why small, open-source models matter</h2><p>Compliance data is sensitive. Many organizations do not want identifiable case content sent to a general-purpose AI provider, retained in provider logs, or exposed to a changing external model.</p>
+<p>A compact open-source SLM changes that deployment equation. The organization can control the model weights, serving environment, access policy, logs, upgrades, and retention behavior. The demonstrated 9B-class model fits a single 24 GB workstation or laptop GPU, making private inference possible without a large multi-GPU cluster.</p>
+<p>Local deployment does not automatically create privacy. The surrounding application, storage, monitoring, and network controls must also remain inside the approved boundary. But it gives the company a realistic way to keep model inference under its own operational control.</p>
+<h2 id="why-a-model-can-be-built-in-days">Why a model can be built in days</h2><p>Traditional compliance software often distributes policy across code branches, configuration, templates, and manual procedures. A policy change can require development, regression testing, and reconciliation across several systems.</p>
+<p>The fine-tuning process starts from a different asset: a versioned decision contract and synthetic case generator. Once those are ready, the team can create a new curriculum, train a compact model, and run held-out evaluations in hours to days. The first complete rulebook-grounded and fine-tuned program was assembled in roughly a week.</p>
+<p>The speed does not come from skipping rigor. It comes from reusing the architecture:</p>
+<pre><code class="language-text">company guide
+→ approved decision contract
+→ synthetic boundary cases
+→ fine-tuned SLM
+→ held-out certification
+→ private deployment
 </code></pre>
-<p>The goal is not to build an AI that never says “I don’t know.” It is to build a compliance system that always knows what must be true before “I know” is allowed to matter.</p>
+<p>What changes for each customer is the policy and validation evidence. The model-building machinery remains stable.</p>
+<h2 id="results-from-the-demonstrated-fine-tuned-slm">Results from the demonstrated fine-tuned SLM</h2><p>The strongest 9B fine-tuned SLM was evaluated against the company-specific decision engine across a retrospective development replay of 24,641 searches and 82,543 court cases.</p>
+<ul>
+<li><strong>94.47% search-level exact agreement</strong></li>
+<li><strong>94.86% case-level accuracy</strong></li>
+<li><strong>91.63% case-level balanced accuracy</strong></li>
+<li>Structured adjudication across the full replay on compact open-source weights</li>
+</ul>
+<p>Earlier iterations established the core feasibility quickly; later iterations improved the balance between decisive answers, unsafe disclosures, false exemptions, and manual review. That progression is part of the product: the model can be retrained against measured failure families without turning real case rows into training examples.</p>
+<p>These are development results, not universal certification. The full retrospective set informed model improvement, so a customer deployment still needs a fresh or sealed holdout after the model and policy are frozen.</p>
+<h2 id="the-slm-with-a-harness-remains-essential">The SLM with a harness remains essential</h2><p>The private model does not eliminate the governed architecture. The two systems protect different things.</p>
+<p>The SLM with a harness keeps the current rulebook external, selected, and reviewable. It is the best place to prove a new guide, resolve conflicting instructions, and respond quickly to policy changes. The fine-tuned SLM packages that approved behavior into compact weights.</p>
+<p>A practical operating pattern is therefore:</p>
+<ul>
+<li>use the SLM with a harness as the policy control and evaluation authority;</li>
+<li>use the fine-tuned SLM as the private company-specific reasoner;</li>
+<li>keep exact safeguards and verification outside the model; and</li>
+<li>retrain or roll back when the guide changes or held-out performance falls.</li>
+</ul>
+<p>This makes the model replaceable without making the company’s compliance policy disposable.</p>
+<h2 id="what-this-could-change-for-background-screening">What this could change for background screening</h2><p>A company-specific fine-tuned SLM can become a shared compliance capability across operations:</p>
+<ul>
+<li>first-pass adjudication of normalized criminal cases;</li>
+<li>reviewer recommendations with explanations and policy citations;</li>
+<li>consistent treatment across teams and shifts;</li>
+<li>rapid testing of a proposed guide revision before rollout;</li>
+<li>quality assurance focused on the cases where model and reviewer disagree;</li>
+<li>private batch processing without per-case calls to a third-party AI model; and</li>
+<li>a reusable foundation for additional record types after separate validation.</li>
+</ul>
+<p>The product is not merely an automation tool. It is a way for a company to make its operating judgment explicit, testable, teachable, and deployable.</p>
+<h2 id="the-standard-for-earned-authority">The standard for earned authority</h2><p>A bespoke model should earn authority one role at a time. It can begin by organizing evidence and drafting recommendations. It can advance to reviewer-assist when its explanations and abstentions are reliable. Narrow automated decisions should come only after a sealed evaluation demonstrates that the model is safe on that exact population and the company has approved the operating boundary.</p>
+<p>The goal is not maximum automation on day one. The goal is a private compliance engine that can become more useful without becoming less accountable.</p>
+<h2 id="evidence-boundary">Evidence boundary</h2><p>The demonstrated fine-tuned SLM learned one company-specific screening guide. The architecture is intended to repeat the process for other guides, but each requires separate policy mapping, synthetic curriculum design, held-out evidence, and counsel approval. Reported accuracy is agreement with the encoded decision engine on a retrospective development replay, not independent legal truth or a production authorization.</p>
 </article>
     <nav class="next-reading" aria-label="More essays">
       <p>Continue the series</p>
-      <a href="comparison.html"><span>Comparison</span>Can AI Beat Deterministic Code?</a><a href="executive.html"><span>Executive brief</span>The Compliance Decision System</a><a href="engineering.html"><span>Engineering</span>Building a System That Can Say ‘Not Yet’</a>
+      <a href="executive.html"><span>Overview</span>Compliance AI, Built Around Your Rules</a><a href="engineering.html"><span>Architecture</span>From Rulebook to Compliance Engine</a>
     </nav>
   </main>
     <footer class="site-footer" id="evidence-note">
@@ -129,7 +117,8 @@ every permitted decision leaves a trace
       <img src="snh-logo.svg" alt="SNH Capital Partners">
       <p>A Wright Original · Built by SNH Strategic Initiatives<br>SNH AI Compliance · July 2026</p>
     </div>
-    <p class="evidence-boundary"><strong>Evidence boundary.</strong> Results are retrospective comparisons against UBS historical outcomes and the current UBS procedural-guide mirror. They are not independent legal validation or authorization for autonomous production decisions. This public site contains no applicant data.</p>
+    <p class="evidence-boundary"><strong>Evidence boundary.</strong> Results come from one retrospective background-screening program and measure agreement with its encoded operating guide. They are not independent legal validation or authorization for autonomous production decisions. This public site contains no applicant data.</p>
+    <a class="supporting-comparison" href="comparison.html">Supporting evidence: SNH AI comparison</a>
   </footer>
   </div>
   <script src="site.js"></script>
