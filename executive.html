@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A company-specific compliance engine that reasons from your guide, explains its decisions, and can become a private fine-tuned SLM in days.">
+  <meta name="description" content="Rules engines handle exact branches. Specialists inherit the ambiguity. We built the decision layer between them.">
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#FAF9F5">
   <title>Compliance AI, Built Around Your Rules · SNH AI Compliance Engines</title>
@@ -20,21 +20,21 @@
     </div>
     <nav id="site-nav" aria-label="Essay navigation">
       <a href="index.html">Series</a>
-      <a href="executive.html" aria-current="page">Overview</a><a href="engineering.html">Architecture</a><a href="philosophy.html">Fine-tuned SLM</a>
+      <a href="executive.html" aria-current="page">Overview</a><a href="walkthrough.html">Walkthrough</a><a href="engineering.html">Architecture</a><a href="fine-tuned.html">Fine-tuned SLM</a><a href="philosophy.html">Philosophy</a>
     </nav>
   </header>
     <main id="main" class="article-main">
     <header class="article-header masthead">
       <p class="series-label">Overview · July 2026 · 6 min</p>
       <h1>Compliance AI, Built Around Your Rules</h1>
-      <p class="article-dek">A company-specific compliance engine that reasons from your guide, explains its decisions, and can become a private fine-tuned SLM in days.</p>
+      <p class="article-dek">Rules engines handle exact branches. Specialists inherit the ambiguity. We built the decision layer between them.</p>
       <div class="byline"><span>SNH Strategic Initiatives</span><span>A Wright Original</span><span>Research brief · July 2026</span></div>
     </header>
     <article class="article-body executive-summary"><h2 id="executive-summary">Executive Summary</h2><ul>
-<li><strong>Every screening company applies compliance differently.</strong> Statutes establish the outer boundary, but companies still make operating choices about evidence, identity, dispositions, timing, exclusions, review thresholds, and customer-specific procedures. A generic model cannot safely guess those choices.</li>
-<li><strong>We built an AI compliance engine that begins with the company’s own guide.</strong> An SLM with a harness reads the relevant rulebook, reasons through each criminal case in the guide’s required order, explains the decision, cites the controlling policy, and routes unresolved evidence to a reviewer.</li>
-<li><strong>We can then turn that behavior into a private, company-specific model.</strong> A fine-tuned SLM learns the decision pattern from synthetic examples, allowing the organization to operate with compact open-source weights under its own control rather than sending case data to a third-party model provider.</li>
-<li><strong>The feasibility result is already material.</strong> In a retrospective program covering 24,641 searches and 82,543 court cases, the governed SLM and the fine-tuned SLM both demonstrated that small models can perform complex criminal-record adjudication at operational scale. The first working system was assembled in roughly a week; company-specific model iterations can be produced in days once the guide and evaluation contract are ready.</li>
+<li><strong>The missing capability is policy application, not policy storage.</strong> Every screening company has an approved way to turn a court record into an action. Rules engines handle exact branches well, but specialists still inherit the records where language, missing evidence, and interacting exceptions must be reconciled.</li>
+<li><strong>We built two forms of the same decision behavior.</strong> An SLM with a harness reasons from the current company guide and leaves a reviewable path. A fine-tuned SLM learns that approved behavior in compact open-source weights that can run inside company-controlled infrastructure.</li>
+<li><strong>The replay established feasibility at operational scale.</strong> Across a large retrospective screening population, both forms demonstrated that compact models can reason through complex criminal cases, preserve structured outputs, and abstain when the evidence does not justify a final decision.</li>
+<li><strong>The next decision is bounded.</strong> Select one new company guide and one case family for a shadow-mode portability pilot. The decision is whether to test the method on a second operating policy—not whether to authorize autonomous adjudication.</li>
 </ul>
 </article>
     <figure class="hero-art"><img src="assets/executive-hero.webp" alt="A company rulebook becoming a governed compliance decision."></figure>
@@ -47,73 +47,38 @@
       <div><b>94.47%</b><span>fine-tuned SLM search-level exact agreement</span></div>
     </div>
     <p class="figure-note">Agreement is measured against the encoded operating guide and decision engine, not independent legal truth. The 96.1% SLM figure is the clean reasoning view with deterministic decision guards disabled.</p>
-  </figure><figure class="architecture-figure flow-figure">
-    <figcaption><strong>One case, one governed handoff</strong><span>Every actor owns a different verb.</span></figcaption>
-    <div class="flow-line">
-      <div><b>Company guide</b><span>defines</span></div>
-      <div><b>Evidence</b><span>bounds</span></div>
-      <div><b>Rules</b><span>resolve</span></div>
-      <div><b>SLM</b><span>interprets</span></div>
-      <div><b>Verifier</b><span>challenges</span></div>
-      <div><b>Trace</b><span>explains</span></div>
-    </div>
-    <p class="manual-branch">If the chain breaks, the only destination is <strong>ManualReview</strong>.</p>
   </figure></aside>
-    <article class="article-body"><h2 id="the-real-problem-is-that-compliance-is-both-legal-and-operational">The real problem is that compliance is both legal and operational</h2><p>Background-screening decisions are not produced by law alone. Two companies can read the same legal landscape and implement different, counsel-approved operating procedures. They may use different identity thresholds, interpret the same disposition vocabulary differently, apply different customer requirements, or choose different points at which uncertainty becomes manual review.</p>
-<p>That means the product cannot be one universal table of answers. It must be a system that can faithfully apply <strong>the rulebook it has been authorized to follow</strong>.</p>
-<p>Human adjudicators already work this way. They read the company guide, inspect the available case facts, follow the decision sequence, resolve exceptions, document the rationale, and stop when the evidence is insufficient. The opportunity is not to replace that judgment with generic text generation. It is to make the same disciplined workflow executable, measurable, and repeatable.</p>
-<h2 id="what-we-built">What we built</h2><p>The platform has two complementary forms.</p>
-<h3 id="slm-with-a-harness">SLM with a harness</h3><p>The SLM with a harness works open-book. For every case, it receives the normalized evidence and only the portions of the company guide that may control the decision. Deterministic safeguards own facts and boundaries that must be exact. The SLM handles the remaining interpretation. An independent verifier checks whether the answer is complete, supported, and consistent with the supplied guide.</p>
-<p>The output is more than a label. It is a decision record containing:</p>
-<ul>
-<li>the case facts that mattered;</li>
-<li>the policy path that controlled;</li>
-<li>the decision and reviewer posture;</li>
-<li>a plain-language explanation;</li>
-<li>citations back to the company guide; and</li>
-<li>a trace that can be replayed after the rulebook or model changes.</li>
-</ul>
-<p>If the evidence or reasoning does not satisfy the contract, the system does not invent certainty. It routes the case to manual review with the unresolved issue preserved.</p>
-<h3 id="fine-tuned-slm">Fine-tuned SLM</h3><p>The fine-tuned SLM is the private, company-specific form. Instead of receiving rule text at runtime, it learns the organization’s adjudication pattern from synthetic examples generated from the approved guide. It learns how the company sequences the decision, which facts matter, when to abstain, and how to explain the result.</p>
-<p>This creates a practical deployment option for organizations that want model inference inside their own environment. The demonstrated 9B-class model can be served on a single 24 GB workstation or laptop GPU. Keeping the model local can keep normalized case inference away from external AI providers, subject to the organization’s surrounding data and hosting controls.</p>
-<p>The two forms solve different operating needs. The SLM with a harness is easier to update when a rule changes and offers the clearest live provenance. The fine-tuned SLM is compact, private, and fast to deploy at scale. They can also work together: the harness remains the control architecture while the fine-tuned SLM becomes its private reasoner.</p>
-<h2 id="how-a-new-company-becomes-a-new-compliance-engine">How a new company becomes a new compliance engine</h2><p>The reusable asset is not one customer’s answer set. It is the conversion process.</p>
-<ol>
-<li><strong>Define the operating authority.</strong> Identify the company guide, counsel-approved interpretations, customer overlays, and review policy that the system is permitted to apply.</li>
-<li><strong>Turn prose into a decision contract.</strong> Make precedence, exceptions, required evidence, and abstention conditions explicit enough to test.</li>
-<li><strong>Normalize the case evidence.</strong> Convert inconsistent source records into stable facts while preserving missingness and warnings.</li>
-<li><strong>Build the governed engine.</strong> Give the SLM the relevant guide sections, constrain its output, verify its claims, and preserve the trace.</li>
-<li><strong>Generate synthetic training cases.</strong> Create controlled examples that cover ordinary decisions, boundary conditions, contradictions, and required manual review without using real people as training material.</li>
-<li><strong>Fine-tune the private SLM.</strong> Teach a compact open-source model to reproduce the approved decision behavior, then test it against held-out cases it did not see during training.</li>
-<li><strong>Deploy with measured authority.</strong> Start with reviewer assistance, measure errors and abstentions, and expand automation only where the evidence supports it.</li>
-</ol>
-<p>The architecture is designed to repeat this process for different company guides. The current program proves the method on one detailed screening rulebook; a new company’s guide would still require its own mapping, counsel review, and certification.</p>
-<h2 id="results-that-establish-feasibility">Results that establish feasibility</h2><p>The proof program exercised real operational complexity rather than a small set of demonstration prompts.</p>
-<ul>
-<li><strong>24,641 searches and 82,543 court cases</strong> were adjudicated in the retrospective replay.</li>
-<li>The <strong>SLM with a harness</strong> reached <strong>96.1% handbook agreement on its final decisions</strong> in the clean model-under-test view, with deterministic decision guards disabled so the result measured the SLM’s reasoning rather than code-owned answers.</li>
-<li>The strongest <strong>fine-tuned SLM</strong> reached <strong>94.47% search-level exact agreement</strong> and <strong>94.86% case-level accuracy</strong> against the decision engine on the full development replay.</li>
-<li>The fine-tuned model produced structured decisions at scale, while the broader program demonstrated local, OpenAI-compatible serving on a single 24 GB GPU.</li>
-<li>The first working rulebook-grounded and fine-tuned lanes were built in roughly a week, with later model iterations taking hours to days rather than months of application redevelopment.</li>
-</ul>
-<p>These figures answer a feasibility question: can compact open-source AI learn to reason through complex criminal cases and reproduce a company’s approved compliance behavior? The answer is yes.</p>
-<p>They do not mean that one model is universally correct for every company or rulebook. The results are retrospective, the guide is the evaluation authority, and each new implementation requires company-specific legal and operational validation.</p>
-<h2 id="what-this-gives-a-screening-company">What this gives a screening company</h2><p>The immediate value is not simply lower model cost. It is control over the compliance system itself.</p>
-<ul>
-<li><strong>Company-specific behavior:</strong> the engine applies the organization’s approved guide rather than a provider’s generic policy assumptions.</li>
-<li><strong>Private deployment:</strong> open-source weights can run inside company-controlled infrastructure.</li>
-<li><strong>Faster policy change:</strong> the governed engine can update its rulebook without rebuilding an entire application, while the fine-tuned model can be refreshed from the new guide.</li>
-<li><strong>Reviewer leverage:</strong> analysts receive a decision, explanation, policy path, and clear reason for any abstention.</li>
-<li><strong>Auditable improvement:</strong> errors can be traced to evidence normalization, policy interpretation, model reasoning, or verification rather than disappearing inside one opaque score.</li>
-<li><strong>A path to bespoke models:</strong> each company can own a compact compliance SLM trained around its procedures and risk posture.</li>
-</ul>
-<h2 id="the-next-step">The next step</h2><p>For a new organization, the right pilot is narrow and concrete: choose one rulebook, one record family, and one existing adjudication workflow. Convert the guide into a testable decision contract, run the SLM with a harness beside human reviewers, and use the approved traces to train a private fine-tuned SLM.</p>
-<p>The measure of success is not whether the model sounds like a reviewer. It is whether it applies the authorized guide consistently, explains the controlling path, abstains for the right reasons, and improves against held-out evidence.</p>
-<h2 id="evidence-boundary">Evidence boundary</h2><p>The architecture is intended to support different company guides, but the quantitative results above come from one retrospective background-screening program. Agreement is measured against the encoded operating guide and decision engine, not independent legal truth. Private deployment reduces the need to send normalized case data to third-party model providers only when the surrounding hosting, logging, and integration stack is also company-controlled. Operational authority remains subject to counsel approval and company-specific validation.</p>
+    <article class="article-body"><h2 id="the-record-is-only-half-the-decision">The record is only half the decision</h2><p>Give the same court record to two screening companies and the facts may be identical while the authorized action differs. Their guides can resolve identity, timing, exclusions, customer requirements, and manual review differently.</p>
+<p>The problem is not that specialists lack judgment. It is that the workflow often makes them reconstruct which facts matter, which instruction controls, and where the evidence stops supporting a final answer.</p>
+<p>Existing automation remains valuable. It executes exact rules quickly and consistently. It does not interpret an ambiguous disposition, reconcile several returned cases, or decide whether a missing fact is material. When the exact branch ends, a specialist inherits the unresolved reasoning.</p>
+<p>A general language model creates a different boundary. It can summarize the record and produce a plausible explanation. It cannot safely guess which company policy it has permission to apply.</p>
+<p>The shared missing capability is a decision layer that treats the company guide as authority, lets a small model interpret the record inside that authority, and preserves uncertainty instead of hiding it.</p>
+<h2 id="we-built-the-decision-layer-in-two-forms">We built the decision layer in two forms</h2><p>The <strong>SLM with a harness</strong> works open-book. It receives the normalized case and the portions of the current guide that may control. The guide defines. The SLM reasons. Exact safeguards constrain. A verifier tests whether the final answer, explanation, and cited instruction agree. A person owns the cases that remain unresolved.</p>
+<p>The <strong>fine-tuned SLM</strong> works from learned behavior. Synthetic cases teach a compact open-source model the company’s policy sequence, decision boundaries, response contract, and reasons to abstain. That creates a path to private inference without making historical people or case rows into training material.</p>
+<p>These are not competing products. The harness is the clearest place to prove and update policy. The fine-tuned SLM is the compact company-specific reasoner that can ultimately operate inside that control architecture.</p>
+<p>The handoff is deliberately simple:</p>
+<blockquote>
+<p>Evidence shows. The guide defines. The SLM reasons. Safeguards constrain. The verifier tests. A person decides. Outcomes teach.</p>
+</blockquote>
+<h2 id="the-evidence-changed-three-things">The evidence changed three things</h2><h3 id="complex-adjudication-is-within-reach-of-compact-models">Complex adjudication is within reach of compact models</h3><p>The retrospective replay covered tens of thousands of searches and court cases. The system had to preserve case boundaries, apply exclusions and timing, distinguish several disposition families, produce structured explanations, and abstain when the record did not justify certainty. The evidence figure above carries the exact scope.</p>
+<p>This was not a demonstration over a handful of curated prompts. It established that small models can perform the decision work at the scale and messiness of a real screening population.</p>
+<h3 id="the-guide-can-remain-external-or-move-into-private-weights">The guide can remain external or move into private weights</h3><p>In the clean model-under-test view, the SLM with a harness agreed with the encoded guide on about 96 of every 100 final decisions it made. Deterministic decision guards were disabled for that measurement, so code-owned answers did not inflate the reasoning result.</p>
+<p>The strongest fine-tuned SLM reproduced about 94 of every 100 complete search decisions and about 95 of every 100 individual case decisions without receiving the rulebook at runtime. The exact search-level result appears in the evidence figure; the dedicated fine-tuned SLM article owns the model-specific evaluation detail.</p>
+<p>The two measurements answer different questions. The first tests open-book reasoning against the guide. The second tests whether the approved behavior can be learned into compact weights. Neither is independent legal validation, and the fine-tuned development population had already informed improvement. A frozen customer implementation still requires a fresh or sealed holdout.</p>
+<h3 id="private-deployment-is-practical">Private deployment is practical</h3><p>A 9B-class model was served end to end on one workstation-class GPU through a standard local model endpoint. That does not make every surrounding system private. Storage, logs, networking, and integrations must also remain inside the approved boundary. It does make company-controlled inference achievable without a large model cluster or a per-case call to a general-purpose model provider.</p>
+<h2 id="what-is-proven-what-comes-next-and-what-must-be-earned">What is proven, what comes next, and what must be earned</h2><p><strong>Built and tested.</strong> One detailed operating guide was converted into a governed decision contract. Both the harnessed and fine-tuned SLMs were exercised across a full retrospective replay. Local 9B-class serving was verified. Model-facing training examples remained synthetic, masked, or normalized.</p>
+<p><strong>Next.</strong> Convert a second company guide, run recommendations beside human reviewers, and capture complete agreement, disagreement, abstention, and override outcomes. That evidence will establish whether the method transfers and where company policy needs clarification.</p>
+<p><strong>Earned future.</strong> If a second guide passes its held-out and live-review gates, the company can expand from read-and-recommend to narrow reviewer assistance and, eventually, controlled execution for certified case families. Authority expands one measured role at a time.</p>
+<h2 id="the-decision">The decision</h2><p>Approve one shadow-mode portability pilot: one company guide, one record family, reviewer-visible recommendations, and no autonomous production authority.</p>
+<p>The pilot should answer one question:</p>
+<blockquote>
+<p>Can the same architecture learn a second company’s approved decision process while preserving accuracy, abstention, explanation quality, privacy, and reviewer control?</p>
+</blockquote>
+<p>A successful answer would establish something more valuable than another model score. It would establish a repeatable way to build private compliance engines around the way each company actually decides.</p>
 </article>
     <nav class="next-reading" aria-label="More essays">
       <p>Continue the series</p>
-      <a href="engineering.html"><span>Architecture</span>From Rulebook to Compliance Engine</a><a href="philosophy.html"><span>Fine-tuned SLM</span>A Private Compliance Model for Each Company</a>
+      <a href="walkthrough.html"><span>Walkthrough</span>One Search, Three Different Decisions</a><a href="engineering.html"><span>Architecture</span>From Rulebook to Compliance Engine</a><a href="fine-tuned.html"><span>Fine-tuned SLM</span>A Private Compliance Model for Each Company</a><a href="philosophy.html"><span>Philosophy</span>Authority Must Be Earned</a>
     </nav>
   </main>
     <footer class="site-footer" id="evidence-note">

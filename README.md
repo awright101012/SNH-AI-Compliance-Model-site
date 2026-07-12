@@ -1,13 +1,15 @@
-# The Compliance Decision System
+# SNH AI Compliance Engines
 
-Public, applicant-safe HTML series about the SNH/UBS compliance decision-system work.
+Public, applicant-safe HTML series about company-specific AI compliance engines for background screening.
 
-The site contains four essays:
+The site contains five primary pieces and one case study:
 
-- Can AI Beat Deterministic Code?
-- The Compliance Decision System
-- Building a System That Can Say “Not Yet”
+- Compliance AI, Built Around Your Rules
+- One Search, Three Different Decisions
+- From Rulebook to Compliance Engine
+- A Private Compliance Model for Each Company
 - Authority Must Be Earned
+- SNH AI: Matched Comparison
 
-All comparison figures are retrospective and retain the denominator and evidence boundaries stated on the pages. No raw applicant or case data is included.
+All quantitative results are retrospective and retain their denominators and evidence boundaries. The walkthrough is explicitly synthetic. No raw applicant or case data is included.
 

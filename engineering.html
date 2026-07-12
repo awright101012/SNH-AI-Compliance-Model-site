@@ -20,12 +20,12 @@
     </div>
     <nav id="site-nav" aria-label="Essay navigation">
       <a href="index.html">Series</a>
-      <a href="executive.html">Overview</a><a href="engineering.html" aria-current="page">Architecture</a><a href="philosophy.html">Fine-tuned SLM</a>
+      <a href="executive.html">Overview</a><a href="walkthrough.html">Walkthrough</a><a href="engineering.html" aria-current="page">Architecture</a><a href="fine-tuned.html">Fine-tuned SLM</a><a href="philosophy.html">Philosophy</a>
     </nav>
   </header>
     <main id="main" class="article-main">
     <header class="article-header masthead">
-      <p class="series-label">Architecture · July 2026 · 7 min</p>
+      <p class="series-label">Architecture · July 2026 · 6 min</p>
       <h1>From Rulebook to Compliance Engine</h1>
       <p class="article-dek">How evidence, company policy, bounded reasoning, verification, and human review become one auditable decision path.</p>
       <div class="byline"><span>SNH Strategic Initiatives</span><span>A Wright Original</span><span>Research brief · July 2026</span></div>
@@ -42,93 +42,77 @@
       <div class="layer trace-layer"><b>Decision trace</b><span>what entered · what controlled · what shipped</span></div>
     </div>
   </figure></aside>
-    <article class="article-body"><h2 id="the-model-reasons-through-the-case-the-architecture-decides-whether-that-reasoning-may-become-an-operational-decision">The model reasons through the case. The architecture decides whether that reasoning may become an operational decision.</h2><p>Building a compliance model is not mainly a prompting problem. It is a systems problem: how to preserve the company’s policy, the case evidence, the decision sequence, and the reviewer’s ability to reconstruct what happened after an AI has interpreted the record.</p>
-<p>The solution is an architecture with distinct responsibilities. The guide defines authority. The evidence bounds the facts. The SLM handles ambiguity. Deterministic controls enforce exact requirements. A verifier challenges the result. A trace preserves the handoff.</p>
-<h2 id="1-begin-with-the-companys-guide-not-a-universal-answer-key">1. Begin with the company’s guide, not a universal answer key</h2><p>The first design decision is also the most important: the model does not decide what policy should be. It applies the operating guide the company has approved.</p>
-<p>That guide may combine law, counsel interpretation, customer requirements, internal risk posture, and review policy. It must be converted into a versioned decision contract that makes precedence and exceptions explicit. When the company changes a rule, the source changes first; testing and model behavior follow.</p>
-<p>This is what makes the architecture portable. A different company does not require a completely new software product. It requires a new authorized guide, a new decision contract, and a new validation set.</p>
-<h2 id="2-normalize-evidence-before-asking-for-judgment">2. Normalize evidence before asking for judgment</h2><p>Court and vendor records arrive in inconsistent shapes. The same concept may appear under different field names, in free text, or not at all. Reasoning directly over raw records makes missingness easy to overlook and privacy boundaries hard to enforce.</p>
-<p>The engine therefore works from a normalized case packet. It contains only the facts needed for adjudication: jurisdiction, charge, disposition, timing, identity sufficiency, relief, source warnings, and other approved inputs. Missing or contradictory information remains explicit.</p>
-<p>This creates one common evidence language for rules, models, evaluators, and reviewers. It also lets the training program use synthetic or masked examples instead of turning real people and historical cases into model-training rows.</p>
-<h2 id="3-apply-the-guide-in-procedural-order">3. Apply the guide in procedural order</h2><p>Compliance guides are sequences, not bags of keywords. Identity may need to be resolved before reportability. Confirmed relief can end the analysis before timing. An offense exclusion can make a later disposition rule irrelevant. A conviction, pending matter, and non-conviction may use different clocks.</p>
-<p>The engine preserves that order:</p>
+    <article class="article-body"><h2 id="the-model-reasons-through-the-case-the-architecture-decides-whether-that-reasoning-may-become-an-operational-decision">The model reasons through the case. The architecture decides whether that reasoning may become an operational decision.</h2><p>The <a href="walkthrough.html">worked example</a> shows the handoff once. This article explains how the handoff remains reliable when the record is incomplete, the guide changes, or the model produces an answer the evidence does not support.</p>
+<h2 id="1-convert-the-guide-into-a-decision-contract">1. Convert the guide into a decision contract</h2><p>A company guide is written for trained people. It can rely on context, cross-references, exceptions, and terms whose meaning changes by branch. A model cannot be expected to infer that operating structure safely from a document dump.</p>
+<p>The first engineering job is to make the guide testable without replacing it. The decision contract names:</p>
+<ul>
+<li>the order in which questions must be answered;</li>
+<li>the evidence required for each branch;</li>
+<li>the most-specific instruction when several appear relevant;</li>
+<li>the conditions that end the analysis;</li>
+<li>the conditions that require review; and</li>
+<li>the version of the guide that authorized the result.</li>
+</ul>
+<p>Policy changes land in that source first. The model, evaluation set, and fine-tuned behavior follow. Policy does not remain hidden inside an old prompt or response template.</p>
+<h2 id="2-normalize-evidence-without-repairing-it-by-assumption">2. Normalize evidence without repairing it by assumption</h2><p>Court and vendor records describe the same concepts in different shapes. Dispositions arrive as codes, phrases, or free text. Dates can be absent or disagree. One search can contain several courts and cases.</p>
+<p>The normalization boundary converts those inputs into stable case facts while preserving missingness and source warnings. Rules, models, reviewers, and evaluators then see the same jurisdiction, charge, disposition, timing, identity evidence, relief indicators, and unresolved issues.</p>
+<p>This boundary also protects the learning program. Raw names, historical people, and row-level case text remain local evidence. Model-facing training uses synthetic, masked, or normalized representations.</p>
+<p>The adapter standardizes what arrived. It does not invent what is missing.</p>
+<h2 id="3-apply-policy-in-procedural-order">3. Apply policy in procedural order</h2><p>Compliance decisions are sequences, not keyword matches. Identity can control before reportability. Confirmed relief can end the analysis before timing. An offense exclusion can make a later disposition branch irrelevant. Convictions, pending matters, and non-convictions can use different clocks.</p>
+<p>The engine therefore walks the guide in a fixed order:</p>
 <pre><code class="language-text">establish identity sufficiency
 → check record relief
 → apply offense exclusions
 → classify disposition and timing
-→ decide, or identify the exact reason review is required
+→ decide, or preserve the exact reason review is required
 </code></pre>
-<p>Exact branches remain deterministic because they should behave identically every time. The SLM is reserved for the parts that genuinely require interpretation: ambiguous disposition language, interacting facts, exception selection, and explanation.</p>
-<h2 id="4-give-the-slm-only-the-evidence-it-is-allowed-to-use">4. Give the SLM only the evidence it is allowed to use</h2><p>The SLM with a harness works open-book. It receives the normalized case, the relevant sections of the current company guide, and a fixed output contract. It does not need to search the internet or rely on legal rules remembered from pretraining.</p>
-<p>This bounded packet serves two purposes. It reduces distraction, and it makes every final claim testable against the exact material supplied for that case. The model may reason within the packet; it may not silently import a different policy.</p>
-<h2 id="5-treat-every-model-response-as-an-untrusted-draft">5. Treat every model response as an untrusted draft</h2><p>Fluent reasoning is not sufficient. Before a response becomes an operational decision, the verifier checks whether:</p>
+<p>Exact branches remain deterministic because they should behave identically every time. The SLM is reserved for the parts that genuinely require interpretation.</p>
+<h2 id="4-bound-the-slm-before-asking-it-to-reason">4. Bound the SLM before asking it to reason</h2><p>The SLM with a harness works open-book. It receives one normalized case, the relevant portions of the current guide, and a fixed decision contract. It does not receive the entire policy universe, search the internet, or rely on legal rules remembered from pretraining.</p>
+<p>The model’s job is narrow: connect the supplied facts to the supplied instructions and produce a structured explanation. The guide remains the authority.</p>
+<p>This separation makes the reasoner replaceable. A hosted model, a local open-source model, or a company-specific fine-tuned SLM can occupy the same reasoning role without rewriting policy selection, verification, or the decision trace.</p>
+<h2 id="5-treat-the-answer-as-an-untrusted-draft">5. Treat the answer as an untrusted draft</h2><p>Fluent reasoning is not permission. Before a response becomes an operational decision, an independent verifier checks whether:</p>
 <ul>
-<li>the required decision fields are present;</li>
-<li>the explanation and final outcome agree;</li>
+<li>the required fields are present;</li>
+<li>the final answer and explanation agree;</li>
 <li>every citation belongs to the current guide and the selected case packet;</li>
 <li>unresolved evidence has not been ignored;</li>
-<li>the correct policy sequence was followed; and</li>
-<li>the answer can be connected to the version of the guide used at decision time.</li>
+<li>the policy sequence remains intact; and</li>
+<li>the answer can be connected to the guide version used at decision time.</li>
 </ul>
-<p>The verifier does not declare independent legal truth. It enforces the company’s decision contract and prevents unsupported model output from acquiring operational authority.</p>
-<h2 id="6-make-uncertainty-an-explicit-destination">6. Make uncertainty an explicit destination</h2><p>A background-screening system will encounter missing dates, weak identifiers, unclassifiable dispositions, contradictory source signals, and policy gaps. Forcing every row into a binary answer converts those evidence problems into hidden errors.</p>
-<p>The architecture uses manual review as a first-class outcome. When the model cannot support a final decision, the system preserves what is missing, what was attempted, and which rule or evidence boundary stopped the process.</p>
-<p>That is useful abstention. It gives a reviewer a narrower question to resolve and gives engineering a measurable failure family to improve.</p>
-<h2 id="7-adjudicate-every-court-case-before-rolling-up-the-search">7. Adjudicate every court case before rolling up the search</h2><p>One screening search can contain several courts, cases, and charges. A decision based only on the first or most prominent record can miss a reportable sibling case.</p>
-<p>The engine evaluates each case separately, preserves its rationale, and then applies a safety-oriented search-level rollup. A disclosable case controls the search. If none is disclosable but one still requires review, review controls. The search is exempt only when every case supports that result.</p>
-<p>This structure also makes evaluation more honest: case-level reasoning and search-level operational outcomes can be measured separately rather than collapsed into one ambiguous score.</p>
-<h2 id="8-preserve-a-trace-that-connects-policy-evidence-and-outcome">8. Preserve a trace that connects policy, evidence, and outcome</h2><p>Every permitted decision carries a reconstruction record: the normalized facts, the guide version, the controlling policy path, the model’s answer, verifier findings, and final disposition.</p>
-<p>The trace lets four groups ask different questions without losing context:</p>
-<ol>
-<li>Operations can see why a case was decided or routed.</li>
-<li>Compliance can see which company rule controlled.</li>
-<li>Engineering can isolate whether the failure came from source normalization, policy mapping, reasoning, or verification.</li>
-<li>Model training can use approved synthetic traces to teach a fine-tuned SLM without copying historical people or case rows.</li>
-</ol>
-<h2 id="9-turn-the-governed-behavior-into-a-private-fine-tuned-slm">9. Turn the governed behavior into a private fine-tuned SLM</h2><p>Once the guide has been made executable and the governed engine is producing trusted examples, a compact open-source model can learn the company’s adjudication pattern.</p>
-<p>The fine-tuned SLM receives normalized facts rather than runtime rule text. Its weights learn the policy sequence, boundary behavior, abstention conditions, and response contract. That makes inference smaller and more portable while preserving a clear benchmark: it must reproduce the approved decision behavior on cases it never saw during training.</p>
-<p>The demonstrated 9B-class model is small enough to serve on a single 24 GB workstation or laptop GPU through a standard local model endpoint. The broader system does not care which compatible model supplies the reasoning, so organizations can change weights or hardware without rewriting the policy and verification layers.</p>
-<h2 id="10-keep-the-two-forms-distinct">10. Keep the two forms distinct</h2><table>
-<thead>
-<tr>
-<th>System</th>
-<th>Runtime input</th>
-<th>Primary strength</th>
-<th>Main tradeoff</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>SLM with a harness</td>
-<td>Case facts plus selected company rules</td>
-<td>Current policy, strong provenance, rapid rule changes</td>
-<td>More runtime components</td>
-</tr>
-<tr>
-<td>Fine-tuned SLM</td>
-<td>Case facts only</td>
-<td>Private, compact, company-specific inference</td>
-<td>Must be retrained and re-certified after material policy change</td>
-</tr>
-</tbody></table>
-<p>The strongest production design can combine them. The harness remains the source of control and auditability; the fine-tuned SLM becomes the locally hosted reasoner inside it.</p>
-<h2 id="what-the-architecture-achieved">What the architecture achieved</h2><p>The retrospective program processed 24,641 searches containing 82,543 court cases. The SLM with a harness reached 96.1% handbook agreement on its final decisions in the clean model-under-test view, with deterministic decision guards disabled. The strongest fine-tuned SLM reached 94.47% search-level exact agreement and 94.86% case-level accuracy against the decision engine on the full development replay.</p>
-<p>Those results matter because the cases were not simple classification prompts. The system had to preserve case boundaries, reason across dispositions and timing, apply exclusions and evidence gates, produce structured decisions, and abstain when the record did not justify certainty.</p>
-<p>The architecture was assembled quickly because policy, evidence, reasoning, verification, and training were separate assets. The first working lanes took roughly a week. Once a company guide is mapped and its evaluation contract is stable, new fine-tuned model iterations can be created in hours to days.</p>
-<h2 id="what-a-customer-implementation-requires">What a customer implementation requires</h2><p>Portability does not eliminate implementation work. Each new company still needs:</p>
+<p>The verifier proves contract compliance and provenance. It does not claim to be an independent legal oracle.</p>
+<p>If the contract fails, the harness rewrites the operational outcome to manual review while retaining the attempted answer and the reason it was blocked.</p>
+<blockquote>
+<p>An unsupported answer may remain visible as evidence of what the model tried. It may not remain executable as a final compliance decision.</p>
+</blockquote>
+<h2 id="6-decide-every-case-before-aggregating-the-search">6. Decide every case before aggregating the search</h2><p>A screening search can contain several cases and charges. A primary-record shortcut can miss a reportable sibling or hide a case that still requires review.</p>
+<p>The engine adjudicates every case separately and preserves its rationale. The search-level rollup happens last: a reportable case controls; otherwise review controls; the search is exempt only when every case supports that result.</p>
+<p>This is a software boundary with an operating consequence. Reviewers can see which case controlled the search and which cases still need attention instead of receiving one unexplained label.</p>
+<h2 id="7-preserve-a-trace-that-supports-review-and-learning">7. Preserve a trace that supports review and learning</h2><p>Every permitted decision carries a reconstruction record: normalized facts, guide version, selected instructions, reasoning output, verifier findings, and final disposition.</p>
+<p>That trace answers different questions for different owners:</p>
 <ul>
-<li>an authorized operating guide and clear owner for policy decisions;</li>
-<li>agreement on case facts, review thresholds, and output vocabulary;</li>
-<li>counsel review of ambiguous or conflicting guide language;</li>
-<li>a representative held-out evaluation set;</li>
-<li>privacy and infrastructure controls for the chosen deployment; and</li>
-<li>a staged operating plan that begins with reviewer assistance.</li>
+<li>Operations can see why the case was decided or routed.</li>
+<li>Compliance can see which company instruction controlled.</li>
+<li>Engineering can isolate whether a failure began in evidence, policy mapping, reasoning, or verification.</li>
+<li>Model training can learn from approved synthetic traces without copying historical case rows.</li>
 </ul>
-<p>The reusable architecture makes those decisions explicit. It does not pretend they are the same for every company.</p>
-<h2 id="evidence-boundary">Evidence boundary</h2><p>The quantitative results come from one retrospective screening program and measure agreement with its encoded operating guide and decision engine. They do not establish universal legal correctness or production autonomy. The 24 GB hardware statement reflects a verified 9B-class local serving configuration; performance, capacity, and infrastructure requirements vary with model size, context, concurrency, and the company’s security controls.</p>
+<p>The outcome can improve the evaluation set, clarify the guide, or motivate a new safeguard. It cannot silently rewrite the company’s policy.</p>
+<h2 id="how-a-second-company-becomes-a-second-engine">How a second company becomes a second engine</h2><p>The reusable asset is the conversion process, not one customer’s answer set.</p>
+<ol>
+<li><strong>Define authority.</strong> Name the company guide, counsel-approved interpretations, customer overlays, and review policy.</li>
+<li><strong>Make the guide testable.</strong> Encode precedence, exceptions, evidence requirements, and abstention conditions.</li>
+<li><strong>Normalize the record.</strong> Build stable case facts while preserving missingness and warnings.</li>
+<li><strong>Run the governed engine.</strong> Evaluate the SLM beside human reviewers with every handoff visible.</li>
+<li><strong>Generate synthetic cases.</strong> Cover ordinary decisions, boundaries, contradictions, and required abstentions without using real people as training rows.</li>
+<li><strong>Fine-tune the private SLM.</strong> Teach a compact open model the approved behavior and test it on unseen cases.</li>
+<li><strong>Expand authority deliberately.</strong> Move from shadow mode to reviewer assistance only after the implementation’s own evidence supports it.</li>
+</ol>
+<p>The current work establishes this process on one detailed guide. A second guide is the portability proof.</p>
+<h2 id="the-engineering-principle">The engineering principle</h2><p>Models will change. Company policy will change. Source records will remain messy.</p>
+<p>The durable system is the separation of powers: evidence can show without deciding; a guide can define without filling gaps; a model can reason without granting permission; software can constrain without pretending ambiguity is gone; and a person can decide without reconstructing the whole path unaided.</p>
 </article>
     <nav class="next-reading" aria-label="More essays">
       <p>Continue the series</p>
-      <a href="executive.html"><span>Overview</span>Compliance AI, Built Around Your Rules</a><a href="philosophy.html"><span>Fine-tuned SLM</span>A Private Compliance Model for Each Company</a>
+      <a href="executive.html"><span>Overview</span>Compliance AI, Built Around Your Rules</a><a href="walkthrough.html"><span>Walkthrough</span>One Search, Three Different Decisions</a><a href="fine-tuned.html"><span>Fine-tuned SLM</span>A Private Compliance Model for Each Company</a><a href="philosophy.html"><span>Philosophy</span>Authority Must Be Earned</a>
     </nav>
   </main>
     <footer class="site-footer" id="evidence-note">

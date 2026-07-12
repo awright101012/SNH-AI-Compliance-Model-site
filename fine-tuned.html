@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Compact open-source models can learn a company’s approved adjudication behavior and run inside company-controlled infrastructure.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#FAF9F5">
+  <title>A Private Compliance Model for Each Company · SNH AI Compliance Engines</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="article-page fine-tuned-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page-frame">
+    <header class="site-header">
+    <div class="topbar">
+      <a class="site-name" href="index.html">SNH AI <span>·</span> Compliance Engines</a>
+      <span class="edition">Company-specific reasoning · July 2026</span>
+    </div>
+    <nav id="site-nav" aria-label="Essay navigation">
+      <a href="index.html">Series</a>
+      <a href="executive.html">Overview</a><a href="walkthrough.html">Walkthrough</a><a href="engineering.html">Architecture</a><a href="fine-tuned.html" aria-current="page">Fine-tuned SLM</a><a href="philosophy.html">Philosophy</a>
+    </nav>
+  </header>
+    <main id="main" class="article-main">
+    <header class="article-header masthead">
+      <p class="series-label">Fine-tuned SLM · July 2026 · 6 min</p>
+      <h1>A Private Compliance Model for Each Company</h1>
+      <p class="article-dek">Compact open-source models can learn a company’s approved adjudication behavior and run inside company-controlled infrastructure.</p>
+      <div class="byline"><span>SNH Strategic Initiatives</span><span>A Wright Original</span><span>Research brief · July 2026</span></div>
+    </header>
+    
+    <figure class="hero-art"><img src="assets/philosophy-hero.webp" alt="A company guide becoming a compact private model."></figure>
+    <aside class="article-proof"><figure class="architecture-figure autonomy-figure">
+    <figcaption><strong>From company guide to private fine-tuned SLM</strong><span>The architecture repeats; the policy and validation evidence are company-specific.</span></figcaption>
+    <ol><li><span>1</span><b>Guide</b><p>Capture company-specific policy</p></li><li><span>2</span><b>Contract</b><p>Make decisions testable</p></li><li><span>3</span><b>Synthesize</b><p>Generate private-safe cases</p></li><li><span>4</span><b>Fine-tune</b><p>Teach a compact open model</p></li><li><span>5</span><b>Deploy</b><p>Run inside company control</p></li></ol>
+  </figure></aside>
+    <article class="article-body"><h2 id="a-bespoke-model-should-learn-the-companys-approved-policy-not-copy-the-companys-historical-mistakes">A bespoke model should learn the company’s approved policy—not copy the company’s historical mistakes.</h2><p>Background-screening programs reflect legal advice, customer obligations, data sources, review thresholds, and years of operating decisions. That makes company-specific behavior valuable. It also makes historical reviewer outcomes a dangerous training authority: they can contain old rules, inconsistent handling, and exceptions that no longer apply.</p>
+<p>The fine-tuned SLM starts from the current guide instead. Synthetic cases turn the approved decision contract into a curriculum. Real historical searches remain evaluation evidence; they do not become training rows.</p>
+<h2 id="what-the-model-learns">What the model learns</h2><p>The fine-tuned SLM receives normalized case facts without the rulebook at runtime. Its weights must learn to:</p>
+<ul>
+<li>identify which facts control;</li>
+<li>follow the company’s policy sequence;</li>
+<li>distinguish disposition and timing families;</li>
+<li>apply exclusions only when their evidence is present;</li>
+<li>preserve required manual review;</li>
+<li>explain how the facts connect to the answer; and</li>
+<li>return the same stable decision contract on every case.</li>
+</ul>
+<p>This resembles a trained reviewer using an operating guide: inspect the evidence, apply the authorized instruction, document the path, and stop when a required fact is missing. The model is not a person and does not replace legal judgment. It reproduces a bounded adjudication process under measurable constraints.</p>
+<h2 id="how-the-private-model-is-created">How the private model is created</h2><pre><code class="language-text">company guide
+→ tested decision contract
+→ synthetic ordinary and boundary cases
+→ compact open-source model
+→ unseen evaluation cases
+→ company-controlled serving
+</code></pre>
+<p>The guide supplies the behavior. The synthetic curriculum supplies coverage. Fine-tuning moves that behavior into the weights. Held-out evaluation determines whether the model learned the intended policy rather than the wording of its lessons.</p>
+<p>The first full 9B demonstration reached a working result through three iterations and roughly 18 GPU-hours on one workstation GPU. Later development iterations improved the model further. The important operating discovery was the iteration speed: once the guide and evaluation contract existed, a model change required hours or days, not a new application-development cycle.</p>
+<p>That timeline is measured for one guide and one model family. A new company’s first implementation still needs policy mapping, synthetic-case design, and its own validation.</p>
+<h2 id="what-the-replay-established">What the replay established</h2><p>On the full development replay, the strongest fine-tuned SLM reproduced roughly 94 of every 100 complete search decisions and about 95 of every 100 individual case decisions made by the encoded guide. Its balanced accuracy was 91.63%, which exposed an important limit: aggregate agreement was stronger than its performance across the less common decision classes.</p>
+<p>That changed the training target. The goal was no longer simply “more correct rows.” It became a balance among false exemptions, unsafe disclosures, appropriate abstention, and decisiveness. Later iterations were retained or rejected according to that full profile rather than one attractive number.</p>
+<p>The development replay had already informed improvement. These results establish feasibility, not a sealed customer certification. A frozen model still needs fresh or untouched evidence before it can earn operational authority.</p>
+<h2 id="why-small-open-source-weights-matter">Why small, open-source weights matter</h2><p>The demonstrated model belongs to a 9B-parameter class that can be served on one 24 GB workstation or laptop GPU. The local path was verified end to end through a standard model endpoint, including structured output and the surrounding decision controls.</p>
+<p>That makes a private deployment practical:</p>
+<ul>
+<li>the company controls the model weights and serving environment;</li>
+<li>normalized case inference need not be sent to a general-purpose model provider;</li>
+<li>model versions can be frozen and rolled back;</li>
+<li>logging and retention can follow company policy; and</li>
+<li>the model can be replaced without rewriting the guide or verification layers.</li>
+</ul>
+<p>Local deployment does not automatically create privacy. Storage, access, networking, observability, and integration logs must also remain inside the approved boundary.</p>
+<h2 id="the-harness-remains-the-control-architecture">The harness remains the control architecture</h2><p>The private model does not eliminate the SLM with a harness. The two forms protect different things.</p>
+<p>The harness keeps the current guide external, selected, and inspectable. It is the best place to prove a new policy, resolve conflicts, and respond quickly to a rule change. The fine-tuned SLM packages approved behavior into compact weights.</p>
+<p>The practical production pattern is to use the fine-tuned SLM as the locally hosted reasoner inside the harness. The model supplies interpretation. Exact safeguards, verification, abstention, and traces remain outside its weights.</p>
+<h2 id="what-must-happen-after-the-guide-changes">What must happen after the guide changes</h2><p>A material policy change creates a new model version. The company updates the decision contract, regenerates the affected synthetic families, retrains or refreshes the model, and reruns the held-out gates.</p>
+<p>Until that candidate passes, the existing model does not inherit the new policy merely because the new words exist somewhere in the organization. The harness can apply the updated guide immediately while the private model re-earns alignment.</p>
+<h2 id="the-consequence">The consequence</h2><p>The fine-tuned SLM turns compliance behavior into a company-controlled asset. Its value is not that the model remembers every rule forever. Its value is that the company can teach, test, deploy, replace, and withhold authority from a compact reasoner without giving up ownership of the guide that governs it.</p>
+</article>
+    <nav class="next-reading" aria-label="More essays">
+      <p>Continue the series</p>
+      <a href="executive.html"><span>Overview</span>Compliance AI, Built Around Your Rules</a><a href="walkthrough.html"><span>Walkthrough</span>One Search, Three Different Decisions</a><a href="engineering.html"><span>Architecture</span>From Rulebook to Compliance Engine</a><a href="philosophy.html"><span>Philosophy</span>Authority Must Be Earned</a>
+    </nav>
+  </main>
+    <footer class="site-footer" id="evidence-note">
+    <div class="footer-mark">
+      <img src="snh-logo.svg" alt="SNH Capital Partners">
+      <p>A Wright Original · Built by SNH Strategic Initiatives<br>SNH AI Compliance · July 2026</p>
+    </div>
+    <p class="evidence-boundary"><strong>Evidence boundary.</strong> Results come from one retrospective background-screening program and measure agreement with its encoded operating guide. They are not independent legal validation or authorization for autonomous production decisions. This public site contains no applicant data.</p>
+    <a class="supporting-comparison" href="comparison.html">Case study: SNH AI comparison</a>
+  </footer>
+  </div>
+  <script src="site.js"></script>
+</body>
+</html>

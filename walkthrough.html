@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A synthetic case shows how evidence, company policy, an SLM, safeguards, verification, and a reviewer hand control to one another.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#FAF9F5">
+  <title>One Search, Three Different Decisions · SNH AI Compliance Engines</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="article-page walkthrough-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page-frame">
+    <header class="site-header">
+    <div class="topbar">
+      <a class="site-name" href="index.html">SNH AI <span>·</span> Compliance Engines</a>
+      <span class="edition">Company-specific reasoning · July 2026</span>
+    </div>
+    <nav id="site-nav" aria-label="Essay navigation">
+      <a href="index.html">Series</a>
+      <a href="executive.html">Overview</a><a href="walkthrough.html" aria-current="page">Walkthrough</a><a href="engineering.html">Architecture</a><a href="fine-tuned.html">Fine-tuned SLM</a><a href="philosophy.html">Philosophy</a>
+    </nav>
+  </header>
+    <main id="main" class="article-main">
+    <header class="article-header masthead">
+      <p class="series-label">Walkthrough · July 2026 · 6 min</p>
+      <h1>One Search, Three Different Decisions</h1>
+      <p class="article-dek">A synthetic case shows how evidence, company policy, an SLM, safeguards, verification, and a reviewer hand control to one another.</p>
+      <div class="byline"><span>SNH Strategic Initiatives</span><span>A Wright Original</span><span>Research brief · July 2026</span></div>
+    </header>
+    
+    
+    <aside class="article-proof"><figure class="architecture-figure case-figure">
+    <figcaption><strong>Three cases remain separate until the search rolls up</strong><span>Illustrative synthetic facts · not a measured example</span></figcaption>
+    <div class="case-grid">
+      <section><b>Case one</b><p>Guide exclusion is conclusive.</p><strong class="case-outcome exempt">Excluded</strong></section>
+      <section><b>Case two</b><p>Evidence supports a final reportable decision.</p><strong class="case-outcome disclose">Reportable</strong></section>
+      <section><b>Case three</b><p>Disposition is ambiguous and the date is missing.</p><strong class="case-outcome review">Manual review</strong></section>
+    </div>
+    <div class="case-rollup"><span>Search-level action</span><b>Reportable</b><p>Case two controls; case three remains visible for follow-up.</p></div>
+  </figure></aside>
+    <article class="article-body"><h2 id="a-screening-search-is-not-one-record-and-should-not-receive-one-unexplained-answer">A screening search is not one record and should not receive one unexplained answer.</h2><p>Consider an illustrative search containing three returned court cases. The facts are synthetic, but the handoffs mirror the operating architecture.</p>
+<ul>
+<li><strong>Case one</strong> contains a disposition the company guide clearly excludes.</li>
+<li><strong>Case two</strong> contains enough evidence for a final reportable decision under the current guide.</li>
+<li><strong>Case three</strong> has an ambiguous disposition and no reliable controlling date.</li>
+</ul>
+<p>A search-level classifier is tempted to compress all three into one label. A reviewer can reach the right answer, but only after reconstructing the cases, finding the controlling instructions, and deciding whether the missing evidence matters.</p>
+<p>The compliance engine keeps those responsibilities separate.</p>
+<h2 id="1-the-evidence-record-shows-what-arrived">1. The evidence record shows what arrived</h2><p>The source adapter creates one bounded case packet for each returned record. It preserves the jurisdiction, charge, disposition, timing, identity evidence, relief indicators, and source warnings needed for adjudication.</p>
+<p>Missing data remains visible. Case three does not acquire a date merely because the next step would be easier with one.</p>
+<p>The evidence record shows. It does not decide.</p>
+<h2 id="2-the-company-guide-defines-what-is-permitted">2. The company guide defines what is permitted</h2><p>For each case, the engine selects only the instructions that may control. The guide establishes the order of review and the point at which a case must stop.</p>
+<p>In this illustration:</p>
+<ul>
+<li>the exclusion controls case one;</li>
+<li>the reportability branch controls case two; and</li>
+<li>the unresolved disposition and date prevent case three from reaching a final answer.</li>
+</ul>
+<p>The guide defines. It does not fill missing evidence.</p>
+<h2 id="3-the-slm-reasons-within-that-boundary">3. The SLM reasons within that boundary</h2><p>The SLM receives each case separately with the relevant guide sections. It connects the facts to the instruction, writes a concise explanation, and identifies the controlling policy path.</p>
+<p>It does not search for a more convenient rule. It does not combine three records into one invented narrative. It does not get permission to ignore a material warning.</p>
+<p>The SLM reasons. It does not grant itself authority.</p>
+<h2 id="4-safeguards-remove-answers-the-evidence-cannot-support">4. Safeguards remove answers the evidence cannot support</h2><p>Exact requirements remain software contracts. A case cannot become final if a required identity threshold is not met, a prohibited citation appears, or a material review reason remains unresolved.</p>
+<p>For case three, the unresolved evidence prevents both a confident reportable answer and a confident exempt answer. The only permitted destination is review.</p>
+<p>Safeguards constrain. They do not interpret genuine ambiguity.</p>
+<h2 id="5-the-verifier-tests-the-handoff">5. The verifier tests the handoff</h2><p>Before any answer survives, the verifier asks whether the decision, explanation, citations, and guide version reconcile.</p>
+<p>Case one must cite the exclusion that actually controlled. Case two must connect the reportable conclusion to the relevant branch. Case three must preserve the unresolved reason instead of disguising it as a completed decision.</p>
+<p>An unsupported answer may remain visible as evidence of what the model tried. It may not remain executable as a final compliance decision.</p>
+<p>The verifier tests. It does not declare independent legal truth.</p>
+<h2 id="6-the-search-level-decision-comes-last">6. The search-level decision comes last</h2><p>Only after every case has an accountable result does the engine roll them into the search outcome.</p>
+<p>Case two is reportable, so the search is reportable. Case one remains excluded. Case three remains visible for follow-up review. No sibling case disappears merely because another case controlled the overall search action.</p>
+<p>That ordering matters. In the retrospective work, moving from a primary-case shortcut to per-case adjudication eliminated a large apparent conflict set because reportable sibling cases were no longer ignored.</p>
+<h2 id="7-a-person-owns-the-unresolved-judgment">7. A person owns the unresolved judgment</h2><p>The reviewer does not receive a blank queue item. The record arrives with the separated cases, the provisional decisions, the controlling policy paths, and the exact reason case three could not be finalized.</p>
+<p>The system has done the reconstruction work. The person still owns the unresolved judgment.</p>
+<h2 id="8-the-outcome-teaches-the-next-version">8. The outcome teaches the next version</h2><p>If the reviewer resolves the ambiguous disposition, that outcome becomes evaluation evidence. Repeated disagreements can reveal a normalization problem, unclear company guidance, a reasoning failure, or a missing safeguard.</p>
+<p>Outcome evidence teaches. It does not automatically rewrite policy or prove why an earlier decision failed.</p>
+<h2 id="the-point-of-the-walkthrough">The point of the walkthrough</h2><p>The product is not the final search label by itself. It is the controlled handoff that makes every case visible, gives every actor one bounded job, and leaves the reviewer with a decision path instead of a reconstruction problem.</p>
+</article>
+    <nav class="next-reading" aria-label="More essays">
+      <p>Continue the series</p>
+      <a href="executive.html"><span>Overview</span>Compliance AI, Built Around Your Rules</a><a href="engineering.html"><span>Architecture</span>From Rulebook to Compliance Engine</a><a href="fine-tuned.html"><span>Fine-tuned SLM</span>A Private Compliance Model for Each Company</a><a href="philosophy.html"><span>Philosophy</span>Authority Must Be Earned</a>
+    </nav>
+  </main>
+    <footer class="site-footer" id="evidence-note">
+    <div class="footer-mark">
+      <img src="snh-logo.svg" alt="SNH Capital Partners">
+      <p>A Wright Original · Built by SNH Strategic Initiatives<br>SNH AI Compliance · July 2026</p>
+    </div>
+    <p class="evidence-boundary"><strong>Evidence boundary.</strong> Results come from one retrospective background-screening program and measure agreement with its encoded operating guide. They are not independent legal validation or authorization for autonomous production decisions. This public site contains no applicant data.</p>
+    <a class="supporting-comparison" href="comparison.html">Case study: SNH AI comparison</a>
+  </footer>
+  </div>
+  <script src="site.js"></script>
+</body>
+</html>
