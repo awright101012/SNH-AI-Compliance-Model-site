@@ -30,20 +30,21 @@
       <p class="article-dek">How evidence, company policy, bounded reasoning, verification, and human review become one auditable decision path.</p>
       <div class="byline"><span>SNH Strategic Initiatives</span><span>A Wright Original</span><span>Research brief · July 2026</span></div>
     </header>
-    
-    <figure class="hero-art"><img src="assets/engineering-hero.webp" alt="A cutaway view of a governed compliance harness."></figure>
+
+    <article class="article-body article-opening"><h2 id="the-model-reasons-through-the-case-the-architecture-decides-whether-that-reasoning-may-become-an-operational-decision">The model reasons through the case. The architecture decides whether that reasoning may become an operational decision.</h2><p>The <a href="walkthrough.html">worked example</a> shows the handoff once. This article explains how the handoff remains reliable when the record is incomplete, the guide changes, or the model produces an answer the evidence does not support.</p>
+</article>
+
     <aside class="article-proof"><figure class="architecture-figure layers-figure">
-    <figcaption><strong>The replaceable model inside a durable trust architecture</strong><span>Policy and proof remain external to the weights.</span></figcaption>
+    <figcaption><strong>The model can change without changing the guide or the checks</strong><span>Policy and proof remain external to the weights.</span></figcaption>
     <div class="layers">
       <div class="layer evidence-layer"><b>Normalized evidence</b><span>safe facts · missingness · case boundaries</span></div>
       <div class="layer policy-layer"><b>Company guide</b><span>identity · relief · exclusions · disposition</span></div>
       <div class="layer model-layer"><b>SLM with a harness</b><span>replaceable model · selected rules · fixed contract</span></div>
-      <div class="layer verifier-layer"><b>Independent verifier</b><span>schema · citations · hashes · fail closed</span></div>
+      <div class="layer verifier-layer"><b>Independent verifier</b><span>required fields · allowed sources · blocked claims · review route</span></div>
       <div class="layer trace-layer"><b>Decision trace</b><span>what entered · what controlled · what shipped</span></div>
     </div>
   </figure></aside>
-    <article class="article-body"><h2 id="the-model-reasons-through-the-case-the-architecture-decides-whether-that-reasoning-may-become-an-operational-decision">The model reasons through the case. The architecture decides whether that reasoning may become an operational decision.</h2><p>The <a href="walkthrough.html">worked example</a> shows the handoff once. This article explains how the handoff remains reliable when the record is incomplete, the guide changes, or the model produces an answer the evidence does not support.</p>
-<h2 id="1-convert-the-guide-into-a-decision-contract">1. Convert the guide into a decision contract</h2><p>A company guide is written for trained people. It can rely on context, cross-references, exceptions, and terms whose meaning changes by branch. A model cannot be expected to infer that operating structure safely from a document dump.</p>
+    <article class="article-body"><h2 id="1-convert-the-guide-into-a-decision-contract">1. Convert the guide into a decision contract</h2><p>A company guide is written for trained people. It can rely on context, cross-references, exceptions, and terms whose meaning changes by branch. A model cannot be expected to infer that operating structure safely from a document dump.</p>
 <p>The first engineering job is to make the guide testable without replacing it. The decision contract names:</p>
 <ul>
 <li>the order in which questions must be answered;</li>
@@ -79,15 +80,15 @@
 <li>the policy sequence remains intact; and</li>
 <li>the answer can be connected to the guide version used at decision time.</li>
 </ul>
-<p>The verifier proves contract compliance and provenance. It does not claim to be an independent legal oracle.</p>
-<p>If the contract fails, the harness rewrites the operational outcome to manual review while retaining the attempted answer and the reason it was blocked.</p>
+<p>The verifier shows that the answer follows the supplied guide and case evidence. It does not claim to be an independent legal oracle.</p>
+<p>If a required check fails, the answer is routed to manual review. The attempted answer and the reason it was blocked remain visible.</p>
 <blockquote>
 <p>An unsupported answer may remain visible as evidence of what the model tried. It may not remain executable as a final compliance decision.</p>
 </blockquote>
 <h2 id="6-decide-every-case-before-aggregating-the-search">6. Decide every case before aggregating the search</h2><p>A screening search can contain several cases and charges. A primary-record shortcut can miss a reportable sibling or hide a case that still requires review.</p>
 <p>The engine adjudicates every case separately and preserves its rationale. The search-level rollup happens last: a reportable case controls; otherwise review controls; the search is exempt only when every case supports that result.</p>
 <p>This is a software boundary with an operating consequence. Reviewers can see which case controlled the search and which cases still need attention instead of receiving one unexplained label.</p>
-<h2 id="7-preserve-a-trace-that-supports-review-and-learning">7. Preserve a trace that supports review and learning</h2><p>Every permitted decision carries a reconstruction record: normalized facts, guide version, selected instructions, reasoning output, verifier findings, and final disposition.</p>
+<h2 id="7-preserve-a-trace-that-supports-review-and-learning">7. Preserve a trace that supports review and learning</h2><p>Every permitted decision keeps the facts used, the guide version, the controlling instructions, the model&#39;s answer, the checks performed, and the result that left the system.</p>
 <p>That trace answers different questions for different owners:</p>
 <ul>
 <li>Operations can see why the case was decided or routed.</li>

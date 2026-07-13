@@ -30,8 +30,17 @@
       <p class="article-dek">A synthetic case shows how evidence, company policy, an SLM, safeguards, verification, and a reviewer hand control to one another.</p>
       <div class="byline"><span>SNH Strategic Initiatives</span><span>A Wright Original</span><span>Research brief · July 2026</span></div>
     </header>
-    
-    
+
+    <article class="article-body article-opening"><h2 id="a-screening-search-is-not-one-record-and-should-not-receive-one-unexplained-answer">A screening search is not one record and should not receive one unexplained answer.</h2><p>Consider an illustrative search containing three returned court cases. The facts are synthetic, but the handoffs mirror the operating architecture.</p>
+<ul>
+<li><strong>Case one</strong> contains a disposition the company guide clearly excludes.</li>
+<li><strong>Case two</strong> contains enough evidence for a final reportable decision under the current guide.</li>
+<li><strong>Case three</strong> has an ambiguous disposition and no reliable controlling date.</li>
+</ul>
+<p>A search-level classifier is tempted to compress all three into one label. A reviewer can reach the right answer, but only after reconstructing the cases, finding the controlling instructions, and deciding whether the missing evidence matters.</p>
+<p>The compliance engine keeps those responsibilities separate.</p>
+</article>
+
     <aside class="article-proof"><figure class="architecture-figure case-figure">
     <figcaption><strong>Three cases remain separate until the search rolls up</strong><span>Illustrative synthetic facts · not a measured example</span></figcaption>
     <div class="case-grid">
@@ -41,15 +50,7 @@
     </div>
     <div class="case-rollup"><span>Search-level action</span><b>Reportable</b><p>Case two controls; case three remains visible for follow-up.</p></div>
   </figure></aside>
-    <article class="article-body"><h2 id="a-screening-search-is-not-one-record-and-should-not-receive-one-unexplained-answer">A screening search is not one record and should not receive one unexplained answer.</h2><p>Consider an illustrative search containing three returned court cases. The facts are synthetic, but the handoffs mirror the operating architecture.</p>
-<ul>
-<li><strong>Case one</strong> contains a disposition the company guide clearly excludes.</li>
-<li><strong>Case two</strong> contains enough evidence for a final reportable decision under the current guide.</li>
-<li><strong>Case three</strong> has an ambiguous disposition and no reliable controlling date.</li>
-</ul>
-<p>A search-level classifier is tempted to compress all three into one label. A reviewer can reach the right answer, but only after reconstructing the cases, finding the controlling instructions, and deciding whether the missing evidence matters.</p>
-<p>The compliance engine keeps those responsibilities separate.</p>
-<h2 id="1-the-evidence-record-shows-what-arrived">1. The evidence record shows what arrived</h2><p>The source adapter creates one bounded case packet for each returned record. It preserves the jurisdiction, charge, disposition, timing, identity evidence, relief indicators, and source warnings needed for adjudication.</p>
+    <article class="article-body"><h2 id="1-the-evidence-record-shows-what-arrived">1. The evidence record shows what arrived</h2><p>The source adapter creates one bounded case packet for each returned record. It preserves the jurisdiction, charge, disposition, timing, identity evidence, relief indicators, and source warnings needed for adjudication.</p>
 <p>Missing data remains visible. Case three does not acquire a date merely because the next step would be easier with one.</p>
 <p>The evidence record shows. It does not decide.</p>
 <h2 id="2-the-company-guide-defines-what-is-permitted">2. The company guide defines what is permitted</h2><p>For each case, the engine selects only the instructions that may control. The guide establishes the order of review and the point at which a case must stop.</p>
@@ -77,7 +78,7 @@
 <p>The system has done the reconstruction work. The person still owns the unresolved judgment.</p>
 <h2 id="8-the-outcome-teaches-the-next-version">8. The outcome teaches the next version</h2><p>If the reviewer resolves the ambiguous disposition, that outcome becomes evaluation evidence. Repeated disagreements can reveal a normalization problem, unclear company guidance, a reasoning failure, or a missing safeguard.</p>
 <p>Outcome evidence teaches. It does not automatically rewrite policy or prove why an earlier decision failed.</p>
-<h2 id="the-point-of-the-walkthrough">The point of the walkthrough</h2><p>The product is not the final search label by itself. It is the controlled handoff that makes every case visible, gives every actor one bounded job, and leaves the reviewer with a decision path instead of a reconstruction problem.</p>
+<h2 id="what-changes-for-the-reviewer">What changes for the reviewer</h2><p>Instead of one unexplained search label, the reviewer receives separated cases, the controlling instruction for each, and the exact reason any case remains unresolved. The system does the reconstruction work; the reviewer retains the judgment.</p>
 </article>
     <nav class="next-reading" aria-label="More essays">
       <p>Continue the series</p>
